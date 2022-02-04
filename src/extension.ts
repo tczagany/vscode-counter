@@ -4,9 +4,11 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { LineCounter, Count } from './LineCounter';
+import Result from './result';
 import Gitignore from './Gitignore';
 import * as minimatch from 'minimatch';
 import { buildUri, createTextDecoder, currentWorkspaceFolder, dirUri, makeDirectories, readJsonFile, readUtf8Files, showTextPreview, writeTextFile } from './vscode-utils';
+import CodeCountVizzuPanel from './vizzu-webview';
 
 const EXTENSION_ID = 'uctakeoff.vscode-counter';
 const EXTENSION_NAME = 'VSCodeCounter';
@@ -42,9 +44,11 @@ export const activate = (context: vscode.ExtensionContext) => {
     const version = vscode.extensions.getExtension(EXTENSION_ID)?.packageJSON?.version;
     log(`${EXTENSION_ID} ver.${version} now active! : ${context.extensionPath}`);
     const codeCountController = new CodeCounterController();
+    codeCountController.extensionUri = vscode.Uri.file(context.extensionPath);
     context.subscriptions.push(
         codeCountController,
-        registerCommand('countInWorkspace', () => codeCountController.countLinesInWorkSpace()),
+        registerCommand('countInWorkspace', () => codeCountController.countLinesInWorkSpace(false)),
+        registerCommand('countInWorkspaceWithVizzu', () => codeCountController.countLinesInWorkSpace(true)),
         registerCommand('countInDirectory', (targetDir: vscode.Uri | undefined) => codeCountController.countLinesInDirectory(targetDir)),
         registerCommand('countInFile', async () => codeCountController.toggleVisible()),
         registerCommand('saveLanguageConfigurations', () => codeCountController.saveLanguageConfigurations()),
@@ -92,6 +96,7 @@ const loadConfig = () => {
 type Config = ReturnType<typeof loadConfig>;
 
 class CodeCounterController {
+    public extensionUri: vscode.Uri = vscode.Uri.file('');
     private codeCounter_: LineCounterTable | null = null;
     private statusBarItem: vscode.StatusBarItem | null = null;
     private outputChannel: vscode.OutputChannel | null = null;
@@ -186,7 +191,7 @@ class CodeCounterController {
     public async countLinesInDirectory(targetDir: vscode.Uri | undefined) {
         const folder = await currentWorkspaceFolder();
         if (targetDir) {
-            await this.countLinesInDirectory_(targetDir, folder.uri);
+            await this.countLinesInDirectory_(targetDir, folder.uri, true);
         } else {
             const option = {
                 value: folder.uri.toString(true),
@@ -195,15 +200,15 @@ class CodeCounterController {
             };
             const uri = await vscode.window.showInputBox(option);
             if (uri) {
-                await this.countLinesInDirectory_(vscode.Uri.parse(uri), folder.uri);
+                await this.countLinesInDirectory_(vscode.Uri.parse(uri), folder.uri, true);
             }
         }
     }
-    public async countLinesInWorkSpace() {
+    public async countLinesInWorkSpace(useVizzu: boolean) {
         const folder = await currentWorkspaceFolder();
-        await this.countLinesInDirectory_(folder.uri, folder.uri);
+        await this.countLinesInDirectory_(folder.uri, folder.uri, useVizzu);
     }
-    private async countLinesInDirectory_(targetUri: vscode.Uri, workspaceDir: vscode.Uri) {
+    private async countLinesInDirectory_(targetUri: vscode.Uri, workspaceDir: vscode.Uri, useVizzu: boolean) {
         const date = new Date();
         const statusBar = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left);
         try {
@@ -237,7 +242,7 @@ class CodeCounterController {
                 .map(d => buildUri(outputDir, d));
 
             const outSubdir = buildUri(outputDir, toLocalDateString(date, ['-', '_', '-']));
-            await outputResults(date, targetUri, results, outSubdir, histories[histories.length - 1], this.conf);
+            await outputResults(date, targetUri, results, outSubdir, histories[histories.length - 1], this.conf, useVizzu, this.extensionUri);
 
             if (histories.length >= this.conf.history) {
                 histories.length -= this.conf.history - 1;
@@ -526,7 +531,8 @@ const outputFiles = new Map<string, string>([
     ['markdown', 'results.md'],
     ['diff-markdown', 'diff.md'],
 ]);
-const outputResults = async (date: Date, targetDirUri: vscode.Uri, results: Result[], outputDir: vscode.Uri, prevOutputDir: vscode.Uri | undefined, conf: Config) => {
+const outputResults = async (date: Date, targetDirUri: vscode.Uri, results: Result[], outputDir: vscode.Uri,
+        prevOutputDir: vscode.Uri | undefined, conf: Config, useVizzu: boolean, extPath: vscode.Uri) => {
     await makeDirectories(outputDir);
     writeTextFile(outputDir, `results.json`, resultsToJson(results));
 
@@ -585,29 +591,18 @@ const outputResults = async (date: Date, targetDirUri: vscode.Uri, results: Resu
     if (previewFile) {
         showTextPreview(buildUri(outputDir, previewFile));
     }
-}
-
-class Result extends Count {
-    public uri: vscode.Uri;
-    public filename: string;
-    public language: string;
-
-    constructor(uri: vscode.Uri, language: string, count = { code: 0, comment: 0, blank: 0 }) {
-        super(count.code, count.comment, count.blank);
-        this.uri = uri;
-        this.filename = uri.fsPath;
-        this.language = language;
-    }
-    clone() {
-        return new Result(this.uri, this.language, this);
+    if (useVizzu) {
+        await CodeCountVizzuPanel.createOrShow(buildUri(extPath), results);
     }
 }
+
 const resultsToJson = (results: Result[]) => {
     const obj: any = {};
     results.forEach(({ uri, language, code, comment, blank }) => obj[uri.toString()] = { language, code, comment, blank });
     // return JSON.stringify(obj, undefined, 2);
     return JSON.stringify(obj);
 }
+
 class Statistics extends Count {
     public name: string;
     public files = 0;
