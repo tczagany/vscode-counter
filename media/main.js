@@ -10,7 +10,6 @@ let chart = {};
     promise.then( (Vizzu) => {
         try {
             chart = new Vizzu.default(display.id);
-            vscode.postMessage({ command: 'showinfo', text: 'data request' });
             vscode.postMessage({ command: 'datarequest', text: '' });
         }
         catch (e) {
@@ -22,14 +21,14 @@ let chart = {};
         const message = event.data;
         switch (message.command) {
             case 'dataready':
-                vscode.postMessage({ command: 'showinfo', text: 'data received' });
                 try {
-                    chart.animate({
+                    chart.initializing
+                    .then(chart => chart.animate({
                         data: message.data,
                         config: {
                             channels: { y: 'code', x: 'file' }
                         }
-                    });
+                    }));
                 }
                 catch(e) {
                     vscode.postMessage({ command: 'showinfo', text: 'anim error' });    

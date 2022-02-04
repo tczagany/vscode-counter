@@ -105,13 +105,10 @@ export default class CodeCountVizzuPanel {
 		let webview = this._panel.webview;
 		const pathOnDisk = vscode.Uri.joinPath(this._extensionUri, 'media');
 		const scriptPathOnDisk = vscode.Uri.joinPath(pathOnDisk, 'main.js');
-		// @ts-ignore
 		const scriptUri = (scriptPathOnDisk).with({ 'scheme': 'vscode-resource' });
 		const styleResetPath = vscode.Uri.joinPath(this._extensionUri, 'media', 'reset.css');
 		const stylesPathMainPath = vscode.Uri.joinPath(this._extensionUri, 'media', 'vscode.css');
-		// @ts-ignore
 		const stylesResetUri = webview.asWebviewUri(styleResetPath);
-		// @ts-ignore
 		const stylesMainUri = webview.asWebviewUri(stylesPathMainPath);
 		let content = CodeCountVizzuPanel._mainPage;
 		content = content.replace('${stylesResetUri}', stylesResetUri.toString());

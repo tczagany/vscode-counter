@@ -1,7 +1,9 @@
 {
   "commands.countInFile.title": "Toggle Real-time Counter Visibility",
   "commands.countInDirectory.title": "Count lines in directory",
+  "commands.vizzuInDirectory.title": "Count lines in directory and vizualize the result",
   "commands.countInWorkspace.title": "Count lines in workspace",
+  "commands.vizzuInWorkspace.title": "Count lines in workspace and vizualize the result",
   "commands.outputAvailableLanguages.title": "Check available languages",
   "commands.saveLanguageConfigurations.title": "Save the collected language configurations",
   

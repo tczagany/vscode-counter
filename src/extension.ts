@@ -48,8 +48,9 @@ export const activate = (context: vscode.ExtensionContext) => {
     context.subscriptions.push(
         codeCountController,
         registerCommand('countInWorkspace', () => codeCountController.countLinesInWorkSpace(false)),
-        registerCommand('countInWorkspaceWithVizzu', () => codeCountController.countLinesInWorkSpace(true)),
-        registerCommand('countInDirectory', (targetDir: vscode.Uri | undefined) => codeCountController.countLinesInDirectory(targetDir)),
+        registerCommand('vizzuInWorkspace', () => codeCountController.countLinesInWorkSpace(true)),
+        registerCommand('countInDirectory', (targetDir: vscode.Uri | undefined) => codeCountController.countLinesInDirectory(targetDir, false)),
+        registerCommand('vizzuInDirectory', (targetDir: vscode.Uri | undefined) => codeCountController.countLinesInDirectory(targetDir, true)),
         registerCommand('countInFile', async () => codeCountController.toggleVisible()),
         registerCommand('saveLanguageConfigurations', () => codeCountController.saveLanguageConfigurations()),
         registerCommand('outputAvailableLanguages', () => codeCountController.outputAvailableLanguages())
@@ -188,10 +189,10 @@ class CodeCounterController {
         this.toOutputChannel(`VS Code Counter : available all ${c.entries().size} languages.`);
     }
 
-    public async countLinesInDirectory(targetDir: vscode.Uri | undefined) {
+    public async countLinesInDirectory(targetDir: vscode.Uri | undefined, useVizzu: boolean) {
         const folder = await currentWorkspaceFolder();
         if (targetDir) {
-            await this.countLinesInDirectory_(targetDir, folder.uri, true);
+            await this.countLinesInDirectory_(targetDir, folder.uri, useVizzu);
         } else {
             const option = {
                 value: folder.uri.toString(true),
@@ -200,7 +201,7 @@ class CodeCounterController {
             };
             const uri = await vscode.window.showInputBox(option);
             if (uri) {
-                await this.countLinesInDirectory_(vscode.Uri.parse(uri), folder.uri, true);
+                await this.countLinesInDirectory_(vscode.Uri.parse(uri), folder.uri, useVizzu);
             }
         }
     }

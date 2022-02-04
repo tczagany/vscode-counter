@@ -35,7 +35,9 @@
   "activationEvents": [
     "onCommand:extension.vscode-counter.countInFile",
     "onCommand:extension.vscode-counter.countInDirectory",
+    "onCommand:extension.vscode-counter.vizzuInDirectory",
     "onCommand:extension.vscode-counter.countInWorkspace",
+    "onCommand:extension.vscode-counter.vizzuInWorkspace",
     "onCommand:extension.vscode-counter.outputAvailableLanguages",
     "onCommand:extension.vscode-counter.saveLanguageConfigurations"
   ],
@@ -54,9 +56,21 @@
         "icon": "icon.png"
       },
       {
+        "command": "extension.vscode-counter.vizzuInDirectory",
+        "category": "VSCodeCounter",
+        "title": "%commands.vizzuInDirectory.title%",
+        "icon": "icon.png"
+      },
+      {
         "command": "extension.vscode-counter.countInWorkspace",
         "category": "VSCodeCounter",
         "title": "%commands.countInWorkspace.title%",
+        "icon": "icon.png"
+      },
+      {
+        "command": "extension.vscode-counter.vizzuInWorkspace",
+        "category": "VSCodeCounter",
+        "title": "%commands.vizzuInWorkspace.title%",
         "icon": "icon.png"
       },
       {
@@ -76,6 +90,11 @@
       "explorer/context": [
         {
           "command": "extension.vscode-counter.countInDirectory",
+          "when": "explorerResourceIsFolder",
+          "group": "2_workspace"
+        },
+        {
+          "command": "extension.vscode-counter.vizzuInDirectory",
           "when": "explorerResourceIsFolder",
           "group": "2_workspace"
         }
