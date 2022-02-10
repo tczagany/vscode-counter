@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import Result from './result';
-import VizzuDataFormatter from './vizzu-dataset';
+import VizzuDataPreprocessor from './vizzu-dataset';
 
 function getWebviewOptions(extensionUri: vscode.Uri): vscode.WebviewOptions {
 	return {
@@ -40,8 +40,9 @@ export default class CodeCountVizzuPanel {
 		}
 
 		CodeCountVizzuPanel.currentPanel = new CodeCountVizzuPanel(panel, extensionUri);
-		const formatter = new VizzuDataFormatter();
-		formatter.makeDataTable(result);
+		const formatter = new VizzuDataPreprocessor();
+		let sorted = formatter.sortByLanguagesAndLinesCount(result);
+		formatter.makeDataTable(sorted);
 		this._data = formatter.getDataTable();
 	}
 

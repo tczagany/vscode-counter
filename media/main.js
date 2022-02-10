@@ -1,11 +1,13 @@
 
 let chart = {};
+let bkgndClolor = "#FF0000";
 
 (function () {
     const vscode = acquireVsCodeApi();
     vscode.postMessage({ command: 'alert', text: 'Js script started' });
 
     const display = /** @type {HTMLElement} */ (document.getElementById('myVizzu'));
+    //bkgndClolor = display.style.backgroundColor;
     let promise = import('./vizzu/vizzu.js');
     promise.then( (Vizzu) => {
         try {
@@ -27,6 +29,8 @@ let chart = {};
                         data: message.data,
                         config: {
                             channels: { y: 'code', x: 'file' }
+                        },
+                        style: {
                         }
                     }));
                 }

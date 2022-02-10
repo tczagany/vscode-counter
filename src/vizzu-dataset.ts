@@ -1,6 +1,6 @@
 import Result from './result';
 
-export default class VizzuDataFormatter {
+export default class VizzuDataPreprocessor {
 	private _vizzuDataTable: any = {};
 	private _pathFragments: Array<Array<String>> = [];
 
@@ -15,6 +15,40 @@ export default class VizzuDataFormatter {
 		this.generatePathSequences(depth);
 		this.generateTableStructure(depth);
 		this.generateRecords(codeCounterData);
+	}
+
+	sortByLanguagesAndLinesCount(codeCounterData: Result[]) {
+		let sorted: Array<Result> = [];
+		let temp: Array<Array<Result>> = [];
+		for(let i = 0; i < codeCounterData.length; i++) {
+			let inserted: boolean = false;
+			let record = codeCounterData[i];
+			for(let j = 0; j < temp.length; j++) {
+				if (temp[j][0].language == record.language) {
+					for(let k = 0; k < temp[j].length; k++) {
+						if (record.code > temp[j][k].code) {
+							temp[j].splice(k, 0, record);
+							inserted = true;
+							break;
+						}
+					}
+					if (!inserted) {
+						temp[j].push(record);
+						inserted = true;
+						break;
+					}
+				}
+			}
+			if (!inserted) {
+				let empty = [];
+				empty.push(record);
+				temp.push(empty);
+			}
+		}
+		for(let i = 0; i < temp.length; i++)
+			for(let j = 0; j < temp[i].length; j++)
+				sorted.push(temp[i][j]);
+		return sorted;
 	}
 
 	generateRecords(codeCounterData: Result[]) {

@@ -5,11 +5,49 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="${stylesResetUri}" rel="stylesheet">
         <link href="${stylesMainUri}" rel="stylesheet">
-        <title>Cat Coding</title>
+        <title>CodeCounter with Vizzu</title>
     </head>
+    <style>
+        .vizzu-div {
+            padding-left:5%;
+            padding-right:5%;
+            padding-bottom:20px;
+            width:100%; height:100%;
+        }
+        .info-label {
+            padding-left:5%;
+            padding-right:5%;
+        }
+        .grid-container {
+            display: grid;
+            padding-left:5%;
+            padding-top:20px;
+            padding-right:5%;
+            padding-bottom:20px;
+            width:100%; height:100%;
+            grid-template-columns: 30px 25% 30px 25% 20px 25% 20px 25%;
+        }
+        .grid-item {
+            align-content: left;
+            margin-top: 5px;
+        }
+    </style>
     <body>
-        <h1>Code counter result</h1>
-        <div id="myVizzu" style="width:100%; height:100%;"></div>
+        <h1 style="text-align: center; padding-top:20px;" id="label_title">Code counter visualization</h1>
+        <div class="grid-container">
+            <input class="grid-item" id="radio_line" type="radio" name="rb1" checked/>
+            <label class="grid-item">Line count</label>
+            <input class="grid-item" id="radio_file" type="radio" name="rb1" checked/>
+            <label class="grid-item">File count</label>
+            <input class="grid-item" id="chkbox_languages" type="checkbox" name="cb1"/>
+            <label class="grid-item">Languages</label>
+            <input class="grid-item" id="chkbox_files" type="checkbox" name="cb2"/>
+            <label class="grid-item">Files</label>
+        </div>
+        <div class="vizzu-div" id="myVizzu"></div>
+        <h2 class="info-label">Date: <span style="font-size: 80%;" id="label_date">2022-02-09 13:25:43</span></h2>
+        <h2 class="info-label">Directory: <span style="font-size: 80%;" id="label_dir">/home/tczagany/Desktop/vizzu/vizzu-lib/src</span></h2>
+        <h2 class="info-label">Summary: <span style="font-size: 80%;" id="label_summary">382 files, 25652 codes, 483 comments, 5892 blanks, all 32027 lines</span></h2>
         <script src="${scriptUri}"></script>
     </body>
 </html>
