@@ -102,6 +102,20 @@ export default class CodeCountVizzuPanel {
 		}
 	}
 
+	private _collectAnimationScripts(dir: String) {
+		let result: String = '';
+		const fs = require('fs');
+		const dirPath = fs.readdirSync(dir.slice(7));
+		dirPath.map((item: String) => {
+			let pathOnDisk = vscode.Uri.joinPath(this._extensionUri, 'media');
+			pathOnDisk = vscode.Uri.joinPath(pathOnDisk, 'animations');
+			pathOnDisk = vscode.Uri.joinPath(pathOnDisk, item.toString());
+			const scriptUri = pathOnDisk.with({ 'scheme': 'vscode-resource' });
+			result += '<script src="' + scriptUri.toString() + '"></script>\n';
+		});
+		return result;
+	}
+
 	private _generatePage() {
 		let webview = this._panel.webview;
 		const pathOnDisk = vscode.Uri.joinPath(this._extensionUri, 'media');
@@ -114,7 +128,9 @@ export default class CodeCountVizzuPanel {
 		let content = CodeCountVizzuPanel._mainPage;
 		content = content.replace('${stylesResetUri}', stylesResetUri.toString());
 		content = content.replace('${stylesMainUri}', stylesMainUri.toString());
-		content = content.replace('${scriptUri}', scriptUri.toString());
+		content = content.replace('${scriptUri}', '<script src="' + scriptUri.toString() + '"></script>');
+		const animScripts = this._collectAnimationScripts(vscode.Uri.joinPath(pathOnDisk, 'animations').toString());
+		content = content.replace('${scriptAnim}', animScripts.toString());
 		this._panel.webview.html = content.valueOf();
 	}
 }

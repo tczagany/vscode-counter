@@ -35,19 +35,20 @@
     <body>
         <h1 style="text-align: center; padding-top:20px;" id="label_title">Code counter visualization</h1>
         <div class="grid-container">
-            <input class="grid-item" id="radio_line" type="radio" name="rb1" checked/>
-            <label class="grid-item">Line count</label>
-            <input class="grid-item" id="radio_file" type="radio" name="rb1" checked/>
-            <label class="grid-item">File count</label>
-            <input class="grid-item" id="chkbox_languages" type="checkbox" name="cb1"/>
-            <label class="grid-item">Languages</label>
-            <input class="grid-item" id="chkbox_files" type="checkbox" name="cb2"/>
-            <label class="grid-item">Files</label>
+            <input class="grid-item" id="radio_line" type="radio" name="rb1" onclick="onBtnClick()" checked/>
+            <label class="grid-item" for="radio_line">Line count</label>
+            <input class="grid-item" id="radio_file" type="radio" name="rb1" onclick="onBtnClick()"/>
+            <label class="grid-item" for="radio_file">File count</label>
+            <input class="grid-item" id="chkbox_languages" type="checkbox" name="cb1" onclick="onBtnClick()"/>
+            <label class="grid-item" for="chkbox_languages">Languages</label>
+            <input class="grid-item" id="chkbox_files" type="checkbox" name="cb2" onclick="onBtnClick()"/>
+            <label class="grid-item" for="chkbox_files">Files</label>
         </div>
         <div class="vizzu-div" id="myVizzu"></div>
         <h2 class="info-label">Date: <span style="font-size: 80%;" id="label_date">2022-02-09 13:25:43</span></h2>
         <h2 class="info-label">Directory: <span style="font-size: 80%;" id="label_dir">/home/tczagany/Desktop/vizzu/vizzu-lib/src</span></h2>
         <h2 class="info-label">Summary: <span style="font-size: 80%;" id="label_summary">382 files, 25652 codes, 483 comments, 5892 blanks, all 32027 lines</span></h2>
-        <script src="${scriptUri}"></script>
+        ${scriptUri}
+        ${scriptAnim}
     </body>
 </html>
