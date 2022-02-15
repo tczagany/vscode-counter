@@ -32,9 +32,9 @@ Animation with one step:
         },
         style: {
             ...
-        },
+        }},
         { duration: 1 }
-    });
+    );
 
 Animation with two steps:
     chart.animate({
@@ -43,16 +43,16 @@ Animation with two steps:
         },
         style: {
             ...
-        },
+        }},
         { duration: 1 }
-    })
+    )
     .then(chart => chart.animate({
         config: {
             ...
         },
         style: {
             ...
-        },
+        }},
         { duration: 1 }
-    }));
+    ));
 }
