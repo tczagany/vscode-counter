@@ -21,5 +21,8 @@ function anim_init() {
                 xAxis: { label: { angle: 0, fontSize:  '1em' }, title: { paddingTop: '2.5em' } }
             }
         }
-    })
+    },
+    {
+        duration: 1
+    });
 }
