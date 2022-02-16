@@ -5,10 +5,14 @@ let vscode = undefined;
 
 let state_l = false;
 let state_f = false;
+let restore_f = false;
 let state_lc = false;
 let state_fc = false;
 
-let lastState = "1000";
+let last_state_l = false;
+let last_state_f = false;
+let last_state_lc = true;
+let last_state_fc = false;
 
 (function () {
     vscode = acquireVsCodeApi();
@@ -57,12 +61,38 @@ function updateCtrlState() {
 
 function onBtnClick() {
     updateCtrlState();
-    let str = "";
-    str += state_lc ? '1' : '0';
-    str += state_fc ? '1' : '0';
-    str += state_l ? '1' : '0';
-    str += state_f ? '1' : '0';
-    let functionName = 'anim_' + lastState + '_' + str + '();';
-    lastState = str;
+    if (state_fc && !last_state_fc) {
+        vscode.postMessage({ command: 'showinfo', text: 'Off'});
+        restore_f = state_f;
+        state_f = false;
+        const cb_files = /** @type {HTMLElement} */ (document.getElementById('chkbox_files'));
+        cb_files.checked = false;
+        cb_files.disabled = true;
+    }
+    if (!state_fc && last_state_fc) {
+        vscode.postMessage({ command: 'showinfo', text: 'On'});
+        const cb_files = /** @type {HTMLElement} */ (document.getElementById('chkbox_files'));
+        cb_files.disabled = false;
+        if (restore_f) {
+            cb_files.checked = true;
+            state_f = true;
+        }
+        restore_f = false;
+    }
+    let state = "";
+    let lastState = "";
+    state += state_lc ? '1' : '0';
+    state += state_fc ? '1' : '0';
+    state += state_l ? '1' : '0';
+    state += state_f ? '1' : '0';
+    lastState += last_state_lc ? '1' : '0';
+    lastState += last_state_fc ? '1' : '0';
+    lastState += last_state_l ? '1' : '0';
+    lastState += last_state_f ? '1' : '0';
+    let functionName = 'anim_' + lastState + '_' + state + '();';
     eval(functionName);
+    last_state_l = state_l;    
+    last_state_f = state_f;
+    last_state_lc = state_lc;
+    last_state_fc = state_fc;
 }
