@@ -1,6 +1,6 @@
 function anim_0110_1010() {
 
-    chart.animate({
+    return chart.animate({
         config: {
             channels: {
                 y: { set: ['$count'], range: { min: '0%', max: '110%' } },
@@ -22,6 +22,7 @@ function anim_0110_1010() {
         }},
         { duration: 1 }
     )
+    
     .then(chart => chart.animate({
         config: {
             channels: {
@@ -93,8 +94,5 @@ function anim_0110_1010() {
             }
         }},
         { duration: 1 }
-    ))
-
-    ;
-
+    ));
 }

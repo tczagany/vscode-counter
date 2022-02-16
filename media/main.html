@@ -18,7 +18,7 @@
             padding-left:5%;
             padding-right:5%;
         }
-        .grid-container {
+        .ctrl-container {
             display: grid;
             padding-left:5%;
             padding-top:20px;
@@ -27,6 +27,16 @@
             width:100%; height:100%;
             grid-template-columns: 30px 25% 30px 25% 20px 25% 20px 25%;
         }
+        .label-container {
+            display: grid;
+            width:100%; height:100%;
+            padding-left:5%;
+            padding-top:20px;
+            padding-right:5%;
+            padding-bottom:20px;
+            grid-template-columns: 60px 100%;
+            grid-template-rows: auto auto auto auto;
+        }
         .grid-item {
             align-content: left;
             margin-top: 5px;
@@ -34,7 +44,7 @@
     </style>
     <body>
         <h1 style="text-align: center; padding-top:20px;" id="label_title">Code counter visualization</h1>
-        <div class="grid-container">
+        <div class="ctrl-container">
             <input class="grid-item" id="radio_line" type="radio" name="rb1" onclick="onBtnClick()" checked/>
             <label class="grid-item" for="radio_line">Line count</label>
             <input class="grid-item" id="radio_file" type="radio" name="rb1" onclick="onBtnClick()"/>
@@ -45,9 +55,12 @@
             <label class="grid-item" for="chkbox_files">Files</label>
         </div>
         <div class="vizzu-div" id="myVizzu"></div>
-        <h2 class="info-label">Date: <span style="font-size: 80%;" id="label_date">2022-02-09 13:25:43</span></h2>
-        <h2 class="info-label">Directory: <span style="font-size: 80%;" id="label_dir">/home/tczagany/Desktop/vizzu/vizzu-lib/src</span></h2>
-        <h2 class="info-label">Summary: <span style="font-size: 80%;" id="label_summary">382 files, 25652 codes, 483 comments, 5892 blanks, all 32027 lines</span></h2>
+        <div class="label-container">
+            <h2 class="info-label">Date:</h2><h2 class="info-label" id="label_date"></h2>
+            <h2 class="info-label">Directory:</h2><h2 class="info-label" id="label_dir"></h2>
+            <h2 class="info-label">Summary:</h2><h2 class="info-label" id="label_summary"></h2>
+            <h2 class="info-label">Details:</h2><h2 class="info-label" id="label_detail"></h2>
+        </div>
         ${scriptUri}
         ${scriptAnim}
     </body>

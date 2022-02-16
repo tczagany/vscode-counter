@@ -1,4 +1,3 @@
-
 let chart = undefined;
 let bkgndClolor = "#FF0000";
 let vscode = undefined;
@@ -23,7 +22,7 @@ let last_state_fc = false;
     promise.then( (Vizzu) => {
         try {
             chart = new Vizzu.default(display.id);
-            vscode.postMessage({ command: 'datarequest', text: '' });
+            vscode.postMessage({ command: 'datarequest' });
         }
         catch (e) {
             vscode.postMessage({ command: 'showerror', text: 'Load error: ' + e });
@@ -33,20 +32,40 @@ let last_state_fc = false;
     window.addEventListener('message', event => {
         const message = event.data;
         switch (message.command) {
+            case 'infoready':
+                updateLabelContent(message.data);
+                break;
             case 'dataready':
                 try {
+                    disableControls(true);
                     chart.initializing
-                    .then(chart => chart.animate({data: message.data }))
-                    .then(() => eval("anim_init();"));
+                    .then(chart => chart.animate({data: message.data}))
+                    .then(() => eval("anim_init().then(() => disableControls(false));"));
                 }
                 catch(e) {
                     vscode.postMessage({ command: 'showerror', text: 'anim error' });
                 }
-                vscode.postMessage({ command: 'showinfo', text: 'Ready'});
+                vscode.postMessage({ command: 'inforequest' });
                 break;
         }
     });
 }());
+
+function updateLabelContent(info) {
+    const date_label = /** @type {HTMLElement} */ (document.getElementById('label_date'));
+    date_label.textContent = info.date;
+    const dir_label = /** @type {HTMLElement} */ (document.getElementById('label_dir'));
+    dir_label.textContent = info.rootDir;
+    const summ_label = /** @type {HTMLElement} */ (document.getElementById('label_summary'));
+    let str = info.files.toString() + ' files, ';
+    str += (info.codeCount + info.blankCount + info.commentCount).toString() + ' lines';
+    summ_label.textContent = str;
+    const detail_label = /** @type {HTMLElement} */ (document.getElementById('label_detail'));
+    str = info.codeCount.toString() + ' code line, ';
+    str += info.blankCount.toString() + ' blank line, ';
+    str += info.commentCount.toString() + ' comment line';
+    detail_label.textContent = str;
+}
 
 function updateCtrlState() {
     const rb_linecount = /** @type {HTMLElement} */ (document.getElementById('radio_line'));
@@ -59,10 +78,20 @@ function updateCtrlState() {
     state_l = cb_languages.checked;
 }
 
+function disableControls(disable) {
+    document.getElementById('radio_file').disabled = disable;
+    document.getElementById('radio_line').disabled = disable;
+    document.getElementById('chkbox_files').disabled = disable;
+    document.getElementById('chkbox_languages').disabled = disable;
+}
+
+function animationDone() {
+    disableControls(false);
+}
+
 function onBtnClick() {
     updateCtrlState();
     if (state_fc && !last_state_fc) {
-        vscode.postMessage({ command: 'showinfo', text: 'Off'});
         restore_f = state_f;
         state_f = false;
         const cb_files = /** @type {HTMLElement} */ (document.getElementById('chkbox_files'));
@@ -70,7 +99,6 @@ function onBtnClick() {
         cb_files.disabled = true;
     }
     if (!state_fc && last_state_fc) {
-        vscode.postMessage({ command: 'showinfo', text: 'On'});
         const cb_files = /** @type {HTMLElement} */ (document.getElementById('chkbox_files'));
         cb_files.disabled = false;
         if (restore_f) {
@@ -89,8 +117,9 @@ function onBtnClick() {
     lastState += last_state_fc ? '1' : '0';
     lastState += last_state_l ? '1' : '0';
     lastState += last_state_f ? '1' : '0';
-    let functionName = 'anim_' + lastState + '_' + state + '();';
-    eval(functionName);
+    let code = 'anim_' + lastState + '_' + state + '().then(() => animationDone());';
+    disableControls(true);
+    eval(code);
     last_state_l = state_l;    
     last_state_f = state_f;
     last_state_lc = state_lc;

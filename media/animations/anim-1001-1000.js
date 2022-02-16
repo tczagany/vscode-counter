@@ -1,6 +1,6 @@
 function anim_1001_1000() {
 
-    chart.animate({
+    return chart.animate({
         config: {
             channels: {
                 y: { set: ['file'], range: { min: '0%', max: '100%' } },
@@ -23,6 +23,7 @@ function anim_1001_1000() {
         }},
         { duration: 2 }
     )
+
     .then(chart => chart.animate({
         config: {
             channels: {
@@ -47,7 +48,7 @@ function anim_1001_1000() {
         }
         }},
         { duration: 1 }
-    )
+    ))
     
     .then(chart => chart.animate({
         config: {
@@ -69,13 +70,7 @@ function anim_1001_1000() {
                 yAxis: { label: { fontSize: '1em', paddingRight: '1.3em'} },
                 xAxis: { label: { angle: 0, fontSize:  '1em' }, title: { paddingTop: '2.5em' } }
             }
-        }
-    },
-    {
-        duration: 1
-    })
-    
+        }},
+        { duration: 1 }
     ));
-
-
 }

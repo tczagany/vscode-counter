@@ -593,7 +593,9 @@ const outputResults = async (date: Date, targetDirUri: vscode.Uri, results: Resu
         showTextPreview(buildUri(outputDir, previewFile));
     }
     if (useVizzu) {
-        await CodeCountVizzuPanel.createOrShow(buildUri(extPath), results);
+        let dateStr = toLocalDateString(date);
+        let dirStr = targetDirUri.path;
+        await CodeCountVizzuPanel.createOrShow(buildUri(extPath), results, dateStr, dirStr);
     }
 }
 

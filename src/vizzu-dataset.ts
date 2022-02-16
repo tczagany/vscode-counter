@@ -1,6 +1,10 @@
 import Result from './result';
 
 export default class VizzuDataPreprocessor {
+	public fileCount: number = 0;
+	public codeLinesCount: number = 0;
+	public blankLinesCount: number = 0;
+	public commentLinesCount: number = 0;
 	private _vizzuDataTable: any = {};
 	private _pathFragments: Array<Array<String>> = [];
 
@@ -67,6 +71,10 @@ export default class VizzuDataPreprocessor {
 				vizzuRecord.push(frags[j]);
 			vizzuRecord[0] = new String(frags[depth - 1].valueOf() + vizzuRecord[0]);
 			this._vizzuDataTable.records.push(vizzuRecord);
+			this.fileCount++;
+			this.codeLinesCount += ccRecord.code;
+			this.blankLinesCount += ccRecord.blank;
+			this.commentLinesCount += ccRecord.comment;
 		}
 	}
 
