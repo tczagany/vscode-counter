@@ -5,6 +5,7 @@ let vscode = undefined;
 let state_l = false;
 let state_f = false;
 let restore_f = false;
+let disable_f = false;
 let state_lc = false;
 let state_fc = false;
 
@@ -81,8 +82,11 @@ function updateCtrlState() {
 function disableControls(disable) {
     document.getElementById('radio_file').disabled = disable;
     document.getElementById('radio_line').disabled = disable;
-    document.getElementById('chkbox_files').disabled = disable;
     document.getElementById('chkbox_languages').disabled = disable;
+    if (disable_f)
+        document.getElementById('chkbox_files').disabled = true;
+    else
+        document.getElementById('chkbox_files').disabled = disable;
 }
 
 function animationDone() {
@@ -91,16 +95,17 @@ function animationDone() {
 
 function onBtnClick() {
     updateCtrlState();
+    const cb_files = /** @type {HTMLElement} */ (document.getElementById('chkbox_files'));
     if (state_fc && !last_state_fc) {
         restore_f = state_f;
         state_f = false;
-        const cb_files = /** @type {HTMLElement} */ (document.getElementById('chkbox_files'));
         cb_files.checked = false;
         cb_files.disabled = true;
+        disable_f = true;
     }
     if (!state_fc && last_state_fc) {
-        const cb_files = /** @type {HTMLElement} */ (document.getElementById('chkbox_files'));
         cb_files.disabled = false;
+        disable_f = false;
         if (restore_f) {
             cb_files.checked = true;
             state_f = true;
@@ -120,7 +125,7 @@ function onBtnClick() {
     let code = 'anim_' + lastState + '_' + state + '().then(() => animationDone());';
     disableControls(true);
     eval(code);
-    last_state_l = state_l;    
+    last_state_l = state_l;
     last_state_f = state_f;
     last_state_lc = state_lc;
     last_state_fc = state_fc;
