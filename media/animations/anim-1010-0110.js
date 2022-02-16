@@ -21,7 +21,7 @@ function anim_1010_0110() {
                 				 title: { paddingTop: '2.5em' } }
             }
         }},
-        { duration: 1 }
+        { duration: 0.1 }
     )
 
     .then(chart => chart.animate({
@@ -44,7 +44,7 @@ function anim_1010_0110() {
                 				 title: { paddingTop: '2.5em' } }
             }
         }},
-        { duration: 1 }
+        { duration: 0.1 }
     ))
     
     .then(chart => chart.animate({
@@ -66,7 +66,7 @@ function anim_1010_0110() {
                 xAxis: { label: { angle: -0.5,  fontSize: '1em' } }
             }
         }},
-        { duration: 1 }
+        { duration: 2 }
     ))
 
     .then(chart => chart.animate({
@@ -89,6 +89,6 @@ function anim_1010_0110() {
                 xAxis: { label: { angle: -0.5, fontSize:  '1em' } }
             }
         }},
-        { duration: 1 }
+        { duration: 0.5 }
     ));
 }

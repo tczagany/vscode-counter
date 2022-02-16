@@ -23,7 +23,7 @@ function anim_1000_1001() {
                              title: { paddingTop: '2.5em' } }
         }
         }},
-        { duration: 1 }
+        { duration: 0.5 }
     )
 
     .then(chart => chart.animate({
@@ -47,6 +47,6 @@ function anim_1000_1001() {
                              title: { paddingTop: '2.5em' } }
             }
         }},
-        { duration: 1 }
+        { duration: 2 }
     ));
 }
