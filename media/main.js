@@ -1,6 +1,6 @@
-let chart = undefined;
-let bkgndClolor = "#FF0000";
 let vscode = undefined;
+let navChart = undefined;
+let infoChart = undefined;
 
 let state_l = false;
 let state_f = false;
@@ -16,13 +16,12 @@ let last_state_fc = false;
 
 (function () {
     vscode = acquireVsCodeApi();
-    vscode.postMessage({ command: 'alert', text: 'Js script started' });
 
-    const display = /** @type {HTMLElement} */ (document.getElementById('myVizzu'));
     let promise = import('./vizzu/vizzu.js');
     promise.then( (Vizzu) => {
         try {
-            chart = new Vizzu.default(display.id);
+            navChart = new Vizzu.default('navVizzu');
+            infoChart = new Vizzu.default('infoVizzu');
             vscode.postMessage({ command: 'datarequest' });
         }
         catch (e) {
@@ -35,13 +34,17 @@ let last_state_fc = false;
         switch (message.command) {
             case 'infoready':
                 updateLabelContent(message.data);
+                addPathFilterButtons(message.data);
                 break;
             case 'dataready':
                 try {
                     disableControls(true);
-                    chart.initializing
-                    .then(chart => chart.animate({data: message.data}))
-                    .then(() => eval("anim_init().then(() => disableControls(false));"));
+                    infoChart.initializing
+                    .then(infoChart => infoChart.animate({data: message.data}))
+                    .then(() => eval("anim_init(infoChart).then(() => disableControls(false));"));
+                    navChart.initializing
+                    .then(navChart => navChart.animate({data: message.data}))
+                    .then(() => eval("nav_anim_init(navChart).then(() => disableControls(false));"));
                 }
                 catch(e) {
                     vscode.postMessage({ command: 'showerror', text: 'anim error' });
@@ -89,10 +92,6 @@ function disableControls(disable) {
         document.getElementById('chkbox_files').disabled = disable;
 }
 
-function animationDone() {
-    disableControls(false);
-}
-
 function onBtnClick() {
     updateCtrlState();
     const cb_files = /** @type {HTMLElement} */ (document.getElementById('chkbox_files'));
@@ -122,7 +121,7 @@ function onBtnClick() {
     lastState += last_state_fc ? '1' : '0';
     lastState += last_state_l ? '1' : '0';
     lastState += last_state_f ? '1' : '0';
-    let code = 'anim_' + lastState + '_' + state + '().then(() => animationDone());';
+    let code = 'anim_' + lastState + '_' + state + '(infoChart).then(() => disableControls(false));';
     disableControls(true);
     eval(code);
     last_state_l = state_l;

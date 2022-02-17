@@ -1,4 +1,4 @@
-function anim_1001_0100() {
+function anim_1001_0100(chart) {
 
     return chart.animate({
         config: {

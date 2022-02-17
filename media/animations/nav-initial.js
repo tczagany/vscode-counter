@@ -1,20 +1,19 @@
 
-function anim_init(chart) {
+function nav_anim_init(chart) {
     
     return chart.animate({
         config: {
             channels: {
-                y: { set: null, range: {min: '0%', max: '100%' } },
-                x: { set: ['code' ], range: { min: '0%', max: '100%' } },
+                y: { set: ['dir0'], range: {min: '0%', max: '100%' } },
+                x: { set: ['code'], range: { min: '0%', max: '100%' } },
                 color: { set: null },
-                label: { set: ['code' ] },
+                label: { set: ['code'] },
             },
             title: null
         },
         style: {
             fontSize: '13',
             logo:{filter: 'lightness(-0.2)' },
-            legend:{paddingLeft:'5.789473684'},
             plot: {
                 paddingLeft: '13em',
                 marker: { label: { position: 'center', fontSize:'1.3em'} },

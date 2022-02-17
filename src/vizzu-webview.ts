@@ -143,11 +143,14 @@ export default class CodeCountVizzuPanel {
 		const scriptUri = (scriptPathOnDisk).with({ 'scheme': 'vscode-resource' });
 		const styleResetPath = vscode.Uri.joinPath(this._extensionUri, 'media', 'reset.css');
 		const stylesPathMainPath = vscode.Uri.joinPath(this._extensionUri, 'media', 'vscode.css');
+		const stylesControlPath = vscode.Uri.joinPath(this._extensionUri, 'media', 'controls.css');
 		const stylesResetUri = webview.asWebviewUri(styleResetPath);
 		const stylesMainUri = webview.asWebviewUri(stylesPathMainPath);
+		const stylesCtrlUri = webview.asWebviewUri(stylesControlPath);
 		let content = CodeCountVizzuPanel._mainPage;
 		content = content.replace('${stylesResetUri}', stylesResetUri.toString());
 		content = content.replace('${stylesMainUri}', stylesMainUri.toString());
+		content = content.replace('${stylesCtrlUri}', stylesCtrlUri.toString());
 		content = content.replace('${scriptUri}', '<script src="' + scriptUri.toString() + '"></script>');
 		const animScripts = this._collectAnimationScripts(vscode.Uri.joinPath(pathOnDisk, 'animations').path);
 		content = content.replace('${scriptAnim}', animScripts.toString());

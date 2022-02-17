@@ -1,0 +1,134 @@
+ul.ks-cboxtags {
+    list-style: none;
+    padding: 20px;
+    display: inline;
+}
+
+ul.ks-cboxtags li {
+  display: inline;
+}
+
+ul.ks-cboxtags li label{
+    display: inline-block;
+    border: 2px solid #dddddd;
+    background-color: #313131;
+    color: #b8b8b8;
+    border-radius: 2px;
+    white-space: nowrap;
+    margin: 3px 0px;
+    user-select: none;
+    transition: all .2s;
+}
+
+ul.ks-cboxtags li label {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+ul.ks-cboxtags li label::before {
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 12px;
+    padding: 2px 6px 2px 2px;
+}
+
+ul.ks-cboxtags li input[type="checkbox"]:checked + label::before {
+    transition: transform .3s ease-in-out;
+}
+
+ul.ks-cboxtags li input[type="checkbox"]:checked + label {
+    border: 2px solid #dddddd;
+    background-color: #b8b8b8;
+    color: #313131;
+    transition: all .2s;
+}
+
+ul.ks-cboxtags li input[type="checkbox"]:disabled + label {
+    border: 2px solid #7e7e7e;
+    background-color: #505050;
+    color: #1f1f1f;
+    transition: all .2s;
+}
+
+ul.ks-cboxtags li input[type="checkbox"] {
+    display: absolute;
+}
+
+ul.ks-cboxtags li input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+}
+
+ul.ks-cboxtags li input[type="checkbox"]:focus + label {
+    border: 2px solid #3d81e6;
+}
+
+ul.ks-radiotags {
+    list-style: none;
+    padding: 20px;
+    display: inline;
+}
+
+ul.ks-radiotags li{
+    display: inline;
+}
+
+ul.ks-radiotags li label{
+    display: inline-block;
+    border: 2px solid #dddddd;
+    background-color: #313131;
+    color: #b8b8b8;
+    border-radius: 25px;
+    white-space: nowrap;
+    margin: 3px 0px;
+    user-select: none;
+    transition: all .2s;
+}
+
+ul.ks-radiotags li label {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+ul.ks-radiotags li label::before {
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 12px;
+    padding: 2px 6px 2px 2px;
+}
+
+ul.ks-radiotags li input[type="radio"]:checked + label::before {
+    transition: transform .3s ease-in-out;
+}
+
+ul.ks-radiotags li input[type="radio"]:checked + label {
+    border: 2px solid #dddddd;
+    background-color: #b8b8b8;
+    color: #313131;
+    transition: all .2s;
+}
+
+ul.ks-radiotags li input[type="radio"]:disabled + label {
+    border: 2px solid #7e7e7e;
+    background-color: #505050;
+    color: #1f1f1f;
+    transition: all .2s;
+}
+
+ul.ks-radiotags li input[type="radio"] {
+    display: absolute;
+    position: absolute;
+    opacity: 0;
+}
+
+ul.ks-radiotags li input[type="radio"]:focus + label {
+    border: 2px solid #3d81e6;
+}
