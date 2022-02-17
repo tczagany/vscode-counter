@@ -1,6 +1,7 @@
 let vscode = undefined;
 let navChart = undefined;
 let infoChart = undefined;
+let dirFilter = [];
 
 let state_l = false;
 let state_f = false;
@@ -44,16 +45,68 @@ let last_state_fc = false;
                     .then(() => eval("anim_init(infoChart).then(() => disableControls(false));"));
                     navChart.initializing
                     .then(navChart => navChart.animate({data: message.data}))
-                    .then(() => eval("nav_anim_init(navChart).then(() => disableControls(false));"));
+                    .then(() => eval("nav_anim_init(navChart).then(() => disableControls(false));"))
+                    .then(() => navChart.on('click', navChartClick));
                 }
                 catch(e) {
-                    vscode.postMessage({ command: 'showerror', text: 'anim error' });
+                    vscode.postMessage({ command: 'showerror', text: 'anim error ' + e.toString() });
                 }
                 vscode.postMessage({ command: 'inforequest' });
                 break;
         }
     });
 }());
+
+function navChartClick(event) {
+    if (event.data.marker != undefined) {
+        let level = dirFilter.length;
+        let levelStr = 'dir' + level.toString();
+        let filterStr = event.data.marker.categories[levelStr];
+        dirFilter.push(filterStr);
+        applyFilter();
+    }
+}
+
+function applyFilter() {
+    infoChart.animate({
+		data: {
+			filter: (record) => {
+                for(let i = 0; i < dirFilter.length; i++) {
+                    let name = 'dir' + i;
+                    let value = dirFilter[i];
+                    if (record[name] != value)
+                        return false;
+                }
+				return true;
+            }
+		}
+	});
+    navChart.animate({
+		data: {
+			filter: (record) => {
+                for(let i = 0; i < dirFilter.length; i++) {
+                    let name = 'dir' + i;
+                    let value = dirFilter[i];
+                    if (record[name] != value)
+                        return false;
+                }
+				return true;
+            }
+		}
+	}).then(() => {
+        updateCtrlState();
+        if (state_lc) {
+            let level = dirFilter.length;
+            let code = 'nav_anim_10xx_filter(navChart, level).then(() => disableControls(false));';
+            eval(code);
+        }
+        else {
+            let level = dirFilter.length;
+            let code = 'nav_anim_01xx_filter(navChart, level).then(() => disableControls(false));';
+            eval(code);
+        }        
+    });
+}
 
 function updateLabelContent(info) {
     const date_label = /** @type {HTMLElement} */ (document.getElementById('label_date'));
@@ -128,11 +181,13 @@ function onBtnClick() {
     disableControls(true);
     eval(code);
     if (navAnimRequest == 2) {
-        let code = 'nav_anim_01xx_10xx(navChart).then(() => disableControls(false));';
+        let level = dirFilter.length;
+        let code = 'nav_anim_01xx_10xx(navChart, level).then(() => disableControls(false));';
         eval(code);
     }
     if (navAnimRequest == 1) {
-        let code = 'nav_anim_10xx_01xx(navChart).then(() => disableControls(false));';
+        let level = dirFilter.length;
+        let code = 'nav_anim_10xx_01xx(navChart, level).then(() => disableControls(false));';
         eval(code);
     }
     last_state_l = state_l;
