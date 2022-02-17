@@ -15,7 +15,6 @@ function nav_anim_init(chart) {
             fontSize: '13',
             logo:{filter: 'lightness(-0.2)' },
             plot: {
-                paddingLeft: '13em',
                 marker: { label: { position: 'center', fontSize:'1.3em'} },
                 yAxis: { label: { fontSize: '1em', paddingRight: '1.3em'} },
                 xAxis: { label: { angle: 0, fontSize:  '1em' }, title: { paddingTop: '2.5em' } }

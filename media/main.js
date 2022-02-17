@@ -95,7 +95,9 @@ function disableControls(disable) {
 function onBtnClick() {
     updateCtrlState();
     const cb_files = /** @type {HTMLElement} */ (document.getElementById('chkbox_files'));
+    let navAnimRequest = 0;
     if (state_fc && !last_state_fc) {
+        navAnimRequest = 1;
         restore_f = state_f;
         state_f = false;
         cb_files.checked = false;
@@ -103,6 +105,7 @@ function onBtnClick() {
         disable_f = true;
     }
     if (!state_fc && last_state_fc) {
+        navAnimRequest = 2;
         cb_files.disabled = false;
         disable_f = false;
         if (restore_f) {
@@ -124,6 +127,14 @@ function onBtnClick() {
     let code = 'anim_' + lastState + '_' + state + '(infoChart).then(() => disableControls(false));';
     disableControls(true);
     eval(code);
+    if (navAnimRequest == 2) {
+        let code = 'nav_anim_01xx_10xx(navChart).then(() => disableControls(false));';
+        eval(code);
+    }
+    if (navAnimRequest == 1) {
+        let code = 'nav_anim_10xx_01xx(navChart).then(() => disableControls(false));';
+        eval(code);
+    }
     last_state_l = state_l;
     last_state_f = state_f;
     last_state_lc = state_lc;
