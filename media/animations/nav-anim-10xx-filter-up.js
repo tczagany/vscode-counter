@@ -1,15 +1,15 @@
-function nav_anim_10xx_filter(chart, dirLevel) {
+function nav_anim_10xx_filter_up(chart, dirLevel) {
 
-    let crDir = 'dir' + (dirLevel - 1);
-    let nextDir = 'dir' + dirLevel;
+    let crDir = 'dir' + (dirLevel + 1);
+    let prevDir = 'dir' + dirLevel;
 
-    vscode.postMessage({ command: 'showinfo', text: nextDir });
+    vscode.postMessage({ command: 'showinfo', text: crDir });
 
     return chart.animate({
         config: {
             channels: {
                 y: { set: [crDir], range: {min: '0%', max: '100%' } },
-                x: { set: ['code', nextDir] },
+                x: { set: ['code', prevDir] },
                 color: { set: null },
                 label: { set: null }
             },
@@ -18,8 +18,8 @@ function nav_anim_10xx_filter(chart, dirLevel) {
         },
         style: {
             plot: {
-                paddingLeft: '8em',                
-                marker: { label: { position: 'right', fontSize: '1em'} },
+                paddingLeft: '13em',                
+                marker: { label: { position: 'center', fontSize: '1.3em'} },
                     xAxis: { label: { angle: 0, fontSize:  '1em' },
                              title: { paddingTop: '2.5em' } }
             }
@@ -30,14 +30,14 @@ function nav_anim_10xx_filter(chart, dirLevel) {
     .then(chart => chart.animate({
         config: {
             channels: {
-                y: { set: [crDir, nextDir], range: {min: '0%', max: '100%' } },
-                x: { set: ['code'] }
+                y: { set: [prevDir, crDir], range: {min: '0%', max: '100%' } },
+                x: { set: ['code', crDir] }
             }
         },
         style: {
             plot: {
-                paddingLeft: '8em',                
-                marker: { label: { position: 'right', fontSize: '1em'} },
+                paddingLeft: '13em',                
+                marker: { label: { position: 'center', fontSize: '1.3em'} },
                     xAxis: { label: { angle: 0, fontSize:  '1em' },
                              title: { paddingTop: '2.5em' } }
             }
@@ -48,15 +48,14 @@ function nav_anim_10xx_filter(chart, dirLevel) {
     .then(chart => chart.animate({
         config: {
             channels: {
-                y: { set: [nextDir], range: {min: '0%', max: '100%' } },
-                x: { set: ['code'] },
-                label: { set: ['code'] }
+                y: { set: [prevDir], range: {min: '0%', max: '100%' } },
+                x: { set: ['code', crDir] }
             }
         },
         style: {
             plot: {
-                paddingLeft: '8em',                
-                marker: { label: { position: 'right', fontSize: '1em'} },
+                paddingLeft: '13em',                
+                marker: { label: { position: 'center', fontSize: '1.3em'} },
                     xAxis: { label: { angle: 0, fontSize:  '1em' },
                              title: { paddingTop: '2.5em' } }
             }

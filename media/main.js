@@ -2,6 +2,8 @@ let vscode = undefined;
 let navChart = undefined;
 let infoChart = undefined;
 let dirFilter = [];
+let dirMaxDepth = 0;
+let activeAnimations = '';
 
 let state_l = false;
 let state_f = false;
@@ -35,40 +37,57 @@ let last_state_fc = false;
         switch (message.command) {
             case 'infoready':
                 updateLabelContent(message.data);
-                addPathFilterButtons(message.data);
+                dirMaxDepth = message.data.depth;
                 break;
             case 'dataready':
-                try {
-                    disableControls(true);
-                    infoChart.initializing
-                    .then(infoChart => infoChart.animate({data: message.data}))
-                    .then(() => eval("anim_init(infoChart).then(() => disableControls(false));"));
-                    navChart.initializing
-                    .then(navChart => navChart.animate({data: message.data}))
-                    .then(() => eval("nav_anim_init(navChart).then(() => disableControls(false));"))
-                    .then(() => navChart.on('click', navChartClick));
-                }
-                catch(e) {
-                    vscode.postMessage({ command: 'showerror', text: 'anim error ' + e.toString() });
-                }
+                disableControls(true, 'start');
+                infoChart.initializing
+                .then(infoChart => infoChart.animate({data: message.data}))
+                .then(() => evaluate("anim_init(infoChart).then(() => disableControls(false, 'info'))"));
+                navChart.initializing
+                .then(navChart => navChart.animate({data: message.data}))
+                .then(() => evaluate("nav_anim_init(navChart).then(() => disableControls(false, 'nav'))"))
+                .then(() => navChart.on('click', navChartClick));
                 vscode.postMessage({ command: 'inforequest' });
                 break;
         }
     });
 }());
 
+function animationError(errType, e) {
+    vscode.postMessage({ command: 'showlog', text: errType + ' ' + e.toString() });
+    disableControls(false, 'err');
+}
+
 function navChartClick(event) {
     if (event.data.marker != undefined) {
-        let level = dirFilter.length;
-        let levelStr = 'dir' + level.toString();
-        let filterStr = event.data.marker.categories[levelStr];
-        dirFilter.push(filterStr);
-        applyFilter();
+        if (dirMaxDepth - 1 > dirFilter.length) {
+            let level = dirFilter.length;
+            let levelStr = 'dir' + level.toString();
+            let filterStr = event.data.marker.categories[levelStr];
+            dirFilter.push(filterStr);
+            applyFilter();
+        }
+        else
+            vscode.postMessage({ command: 'showinfo', text: 'Filtering is not possible!' });
+    }
+}
+
+function evaluate(code) {
+    vscode.postMessage({ command: 'showlog', text: 'eval ' + code });
+    try {
+        let errLoggedCode = code +
+            '.catch((e) => { animationError("vizzu" , e); })';
+        eval(errLoggedCode);
+    }
+    catch(e) {
+        animationError('js eval', e);
     }
 }
 
 function applyFilter() {
-    infoChart.animate({
+    disableControls(true, 'start');
+    let promise1 = infoChart.animate({
 		data: {
 			filter: (record) => {
                 for(let i = 0; i < dirFilter.length; i++) {
@@ -81,7 +100,7 @@ function applyFilter() {
             }
 		}
 	});
-    navChart.animate({
+    let promise2 = navChart.animate({
 		data: {
 			filter: (record) => {
                 for(let i = 0; i < dirFilter.length; i++) {
@@ -93,18 +112,21 @@ function applyFilter() {
 				return true;
             }
 		}
-	}).then(() => {
+	});
+    Promise.all([promise1, promise2]).then(() => {
+        disableControls(false, 'info');
         updateCtrlState();
         if (state_lc) {
-            let level = dirFilter.length;
-            let code = 'nav_anim_10xx_filter(navChart, level).then(() => disableControls(false));';
-            eval(code);
+            let code = 'nav_anim_10xx_filter(navChart, dirFilter.length).then(() => disableControls(false, "nav"))';
+            evaluate(code);
         }
         else {
-            let level = dirFilter.length;
-            let code = 'nav_anim_01xx_filter(navChart, level).then(() => disableControls(false));';
-            eval(code);
-        }        
+            let code = 'nav_anim_01xx_filter(navChart, dirFilter.length).then(() => disableControls(false, "nav"))';
+            evaluate(code);
+        }    
+    })
+    .catch((e) => {
+        animationError('filtering', e);
     });
 }
 
@@ -135,14 +157,45 @@ function updateCtrlState() {
     state_l = cb_languages.checked;
 }
 
-function disableControls(disable) {
-    document.getElementById('radio_file').disabled = disable;
-    document.getElementById('radio_line').disabled = disable;
-    document.getElementById('chkbox_languages').disabled = disable;
-    if (disable_f)
-        document.getElementById('chkbox_files').disabled = true;
+function disableControls(disable, animClass) {
+    vscode.postMessage({ command: 'showlog', text: 'disableControls class ' + animClass });
+    if (animClass == 'start')
+        activeAnimations = 'info nav';
     else
-        document.getElementById('chkbox_files').disabled = disable;
+        activeAnimations = activeAnimations.replace(animClass, '');
+    activeAnimations = activeAnimations.trim();
+    if (animClass == 'err')
+        activeAnimations = '';
+    vscode.postMessage({ command: 'showlog', text: 'disableControls anim ' + activeAnimations });
+    if (animClass == 'start' || activeAnimations.length == 0) {
+        document.getElementById('radio_file').disabled = disable;
+        document.getElementById('radio_line').disabled = disable;
+        document.getElementById('chkbox_languages').disabled = disable;
+        if (disable_f)
+            document.getElementById('chkbox_files').disabled = true;
+        else
+            document.getElementById('chkbox_files').disabled = disable;
+    }
+}
+
+function onBackClick() {
+    if (dirFilter.length > 0) {
+        updateCtrlState();
+        disableControls(true, "start");
+        if (state_lc) {
+            let code = 'nav_anim_10xx_filter_up(navChart, dirFilter.length - 1).then(() => disableControls(false, "nav"))';
+            evaluate(code);
+        }
+        else {
+            let code = 'nav_anim_01xx_filter_up(navChart, dirFilter.length - 1).then(() => disableControls(false, "nav"))';
+            evaluate(code);
+        }
+    }
+    else
+        vscode.postMessage({ command: 'showinfo', text: 'Filtering is not possible!' });
+}
+
+function onZoomClick() {
 }
 
 function onBtnClick() {
@@ -177,19 +230,19 @@ function onBtnClick() {
     lastState += last_state_fc ? '1' : '0';
     lastState += last_state_l ? '1' : '0';
     lastState += last_state_f ? '1' : '0';
-    let code = 'anim_' + lastState + '_' + state + '(infoChart).then(() => disableControls(false));';
-    disableControls(true);
-    eval(code);
+    let code = 'anim_' + lastState + '_' + state + '(infoChart).then(() => disableControls(false, "info"))';
+    disableControls(true, 'start');
+    evaluate(code);
     if (navAnimRequest == 2) {
-        let level = dirFilter.length;
-        let code = 'nav_anim_01xx_10xx(navChart, level).then(() => disableControls(false));';
-        eval(code);
+        let code = 'nav_anim_01xx_10xx(navChart, dirFilter.length).then(() => disableControls(false, "nav"))';
+        evaluate(code);
     }
-    if (navAnimRequest == 1) {
-        let level = dirFilter.length;
-        let code = 'nav_anim_10xx_01xx(navChart, level).then(() => disableControls(false));';
-        eval(code);
+    else if (navAnimRequest == 1) {
+        let code = 'nav_anim_10xx_01xx(navChart, dirFilter.length).then(() => disableControls(false, "nav"))';
+        evaluate(code);
     }
+    else
+        disableControls(false, 'nav');
     last_state_l = state_l;
     last_state_f = state_f;
     last_state_lc = state_lc;

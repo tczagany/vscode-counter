@@ -5,6 +5,7 @@ export default class VizzuDataPreprocessor {
 	public codeLinesCount: number = 0;
 	public blankLinesCount: number = 0;
 	public commentLinesCount: number = 0;
+	public dirStructureDepth: number = 0;
 	private _vizzuDataTable: any = {};
 	private _pathFragments: Array<Array<String>> = [];
 
@@ -15,9 +16,9 @@ export default class VizzuDataPreprocessor {
 	makeDataTable(codeCounterData: Result[]) {
 		this.preparePathFragments(codeCounterData);
 		this.removeRedundantPathFragments();
-		let depth = this.getDirStructureDepth();
-		this.generatePathSequences(depth);
-		this.generateTableStructure(depth);
+		this.dirStructureDepth = this.getDirStructureDepth();
+		this.generatePathSequences();
+		this.generateTableStructure();
 		this.generateRecords(codeCounterData);
 	}
 
@@ -78,13 +79,13 @@ export default class VizzuDataPreprocessor {
 		}
 	}
 
-	generateTableStructure(depth: number) {
+	generateTableStructure() {
 		this._vizzuDataTable.series.push({ name: 'file', type: 'dimension' });
 		this._vizzuDataTable.series.push({ name: 'type', type: 'dimension' });
 		this._vizzuDataTable.series.push({ name: 'code', type: 'measure' });
 		this._vizzuDataTable.series.push({ name: 'blank', type: 'measure' });
 		this._vizzuDataTable.series.push({ name: 'comment', type: 'measure' });
-		for(let i = 0; i < depth; i++) {
+		for(let i = 0; i < this.dirStructureDepth; i++) {
 			this._vizzuDataTable.series.push({ name: 'dir' + i, type: 'dimension' });
 		}
 	}
@@ -133,7 +134,7 @@ export default class VizzuDataPreprocessor {
 		return depth;
 	}
 
-	generatePathSequences(depth: number) {
+	generatePathSequences() {
 		for(let i = 0; i < this._pathFragments.length; i++) {
 			let prefix = '';
 			let currentDepth = 0;
@@ -147,7 +148,7 @@ export default class VizzuDataPreprocessor {
 				else
 					prefix = temp.valueOf() + '/';
 			}
-			for(let i = depth - currentDepth; i > 0; i--)
+			for(let i = this.dirStructureDepth - currentDepth; i > 0; i--)
 				frags.push(new String(prefix));
 		}
 	}
