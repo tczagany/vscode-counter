@@ -72,6 +72,9 @@ export default class CodeCountVizzuPanel {
 		this._panel.webview.onDidReceiveMessage(
 			message => {
 				switch (message.command) {
+					case 'showlog':
+						console.log('Vizzu web view: ' + message.text);
+						return;
 					case 'showinfo':
 						vscode.window.showInformationMessage(message.text);
 						return;
@@ -93,7 +96,8 @@ export default class CodeCountVizzuPanel {
 								date: CodeCountVizzuPanel._dateString,
 								commentCount: CodeCountVizzuPanel._data.commentLinesCount,
 								blankCount: CodeCountVizzuPanel._data.blankLinesCount,
-								codeCount: CodeCountVizzuPanel._data.codeLinesCount
+								codeCount: CodeCountVizzuPanel._data.codeLinesCount,
+								depth: CodeCountVizzuPanel._data.dirStructureDepth
 							};
 							this._panel.webview.postMessage(
 								{ command: 'infoready', data: info });
