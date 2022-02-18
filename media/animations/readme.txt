@@ -5,6 +5,16 @@ Data series names:
     Languages       type
     File name       file
 
+
+10xx = Line count
+01xx = File count
+
+10xx-01xx = Line count 2 File count
+
+File tetején= chart, dirLevel
+
+
+
 Control state transitions:
     1000-1001 Line count + Files (Final 6)
     1001-1000 Line count - Files (Final 6)

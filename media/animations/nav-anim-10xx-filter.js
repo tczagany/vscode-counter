@@ -16,8 +16,8 @@ function nav_anim_10xx_filter(chart, dirLevel) {
         },
         style: {
             plot: {
-                paddingLeft: '13em',                
-                marker: { label: { position: 'center', fontSize: '1.3em'} },
+                paddingLeft: '8em',                
+                marker: { label: { position: 'right', fontSize: '1em'} },
                     xAxis: { label: { angle: 0, fontSize:  '1em' },
                              title: { paddingTop: '2.5em' } }
             }
@@ -34,8 +34,8 @@ function nav_anim_10xx_filter(chart, dirLevel) {
         },
         style: {
             plot: {
-                paddingLeft: '13em',                
-                marker: { label: { position: 'center', fontSize: '1.3em'} },
+                paddingLeft: '8em',                
+                marker: { label: { position: 'right', fontSize: '1em'} },
                     xAxis: { label: { angle: 0, fontSize:  '1em' },
                              title: { paddingTop: '2.5em' } }
             }
@@ -53,8 +53,8 @@ function nav_anim_10xx_filter(chart, dirLevel) {
         },
         style: {
             plot: {
-                paddingLeft: '13em',                
-                marker: { label: { position: 'center', fontSize: '1.3em'} },
+                paddingLeft: '8em',                
+                marker: { label: { position: 'right', fontSize: '1em'} },
                     xAxis: { label: { angle: 0, fontSize:  '1em' },
                              title: { paddingTop: '2.5em' } }
             }
