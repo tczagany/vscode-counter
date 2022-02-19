@@ -1,37 +1,45 @@
 
 function anim_init(chart) {
-    
+
     return chart.animate({
         config: {
             channels: {
-                y: { set: null, range: {min: '0%', max: '100%' } },
-                x: { set: ['code' ], range: { min: '0%', max: '100%' } },
+                y: { set: null, range: { min: '0%', max: '100%' } },
+                x: { set: ['code'], range: { min: '0%', max: '100%' } },
                 color: { set: null },
-                label: { set: ['code' ] },
+                label: { set: ['code'] },
             },
             title: null,
             legend: null
         },
         style: {
-            fontSize: '12',
-            logo:{filter: 'lightness(-0.2)' },
-            legend:{width:'9em', marker:{size:'11'}, paddingLeft:'0', paddingRight:'0'},
+            backgroundColor: '#00000000',
+            logo: { filter: 'opacity(0)' },
+            legend: { width: '9em', marker: { size: '11' }, paddingLeft: '0', paddingRight: '0' },
             plot: {
                 paddingLeft: '12em',
-                marker: { label: { position: 'center', fontSize:'1em'} },
-                yAxis: { label: { fontSize: '1em', paddingRight: '1em'} },
-                xAxis: { label: { angle: 0, fontSize:  '1em' }, title: { paddingTop: '2.2em' } }
+                marker: { label: { position: 'center' } },
+                yAxis: {
+                    color: 'rgba(130,130,130,0.2)',
+                    interlacing: { color: 'rgba(126,126,126,0.08)' },
+                    label: { paddingRight: '1em' }
+                },
+                xAxis: {
+                    color: 'rgba(130,130,130,0.2)',
+                    interlacing: { color: 'rgba(126,126,126,0.08)' },
+                    label: { angle: 0 }, title: { paddingTop: '2.2em' }
+                }
             }
         }
     },
-    {
-        duration: 1
-    })
+        {
+            duration: 1
+        })
 
-    .then(chart => {
-        chart.feature('tooltip',true);
-        return chart;
-    })
-    
-    ;
+        .then(chart => {
+            chart.feature('tooltip', true);
+            return chart;
+        })
+
+        ;
 }

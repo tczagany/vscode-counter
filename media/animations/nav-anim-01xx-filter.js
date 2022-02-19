@@ -6,7 +6,7 @@ function nav_anim_01xx_filter(chart, dirLevel) {
     return chart.animate({
         config: {
             channels: {
-                y: { set: ['$count', nextDir], range: {min: '0%', max: '100%' } },
+                y: { set: ['$count', nextDir], range: { min: '0%', max: '100%' } },
                 x: { set: [crDir] },
                 color: { set: null },
                 label: { set: null }
@@ -16,49 +16,46 @@ function nav_anim_01xx_filter(chart, dirLevel) {
         },
         style: {
             plot: {
-//                paddingLeft: '8em',                
-                marker: { label: { position: 'top', fontSize: '1em'} },
-                    xAxis: { label: { angle: -0.7, fontSize:  '1em' },
-                             title: { paddingTop: '2.5em' } }
+                marker: { label: { position: 'top' } },
+                xAxis: { label: { angle: -0.7 } }
             }
-        }},
-        { duration: 2 }
+        }
+    },
+        { duration: 0.5 }
     )
 
-    .then(chart => chart.animate({
-        config: {
-            channels: {
-                y: { set: ['$count'], range: {min: '0%', max: '100%' } },
-                x: { set: [crDir, nextDir] }
+        .then(chart => chart.animate({
+            config: {
+                channels: {
+                    y: { set: ['$count'], range: { min: '0%', max: '100%' } },
+                    x: { set: [crDir, nextDir] }
+                }
+            },
+            style: {
+                plot: {
+                    marker: { label: { position: 'top' } },
+                    xAxis: { label: { angle: -0.7, fontSize: '0.9em' } }
+                }
             }
         },
-        style: {
-            plot: {
-//                paddingLeft: '8em',                
-                marker: { label: { position: 'top', fontSize: '1em'} },
-                    xAxis: { label: { angle: -0.7, fontSize:  '0.9em' },
-                             title: { paddingTop: '2.5em' } }
-            }
-        }},
-        { duration: 2 }
-    ))
+            { duration: 1 }
+        ))
 
-    .then(chart => chart.animate({
-        config: {
-            channels: {
-                y: { set: ['$count'], range: {min: '0%', max: '100%' } },
-                x: { set: [nextDir] },
-                label: { set: ['$count'] }
+        .then(chart => chart.animate({
+            config: {
+                channels: {
+                    y: { set: ['$count'], range: { min: '0%', max: '100%' } },
+                    x: { set: [nextDir] },
+                    label: { set: ['$count'] }
+                }
+            },
+            style: {
+                plot: {
+                    marker: { label: { position: 'top' } },
+                    xAxis: { label: { angle: -0.7, fontSize: '0.8em' } }
+                }
             }
         },
-        style: {
-            plot: {
-                paddingLeft: '8em',                
-                marker: { label: { position: 'top', fontSize: '1em'} },
-                    xAxis: { label: { angle: -0.7, fontSize:  '0.8em' },
-                             title: { paddingTop: '2.5em' } }
-            }
-        }},
-        { duration: 2 }
-    ));
+            { duration: 1 }
+        ));
 }
