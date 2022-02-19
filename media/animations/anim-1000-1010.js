@@ -15,7 +15,7 @@ function anim_1000_1010(chart) {
             plot: {
                 paddingLeft: '9em',
                 marker: { label: { position: 'center' } },
-                yAxis: { label: { paddingRight: '1.3em' } },
+                yAxis: { label: { paddingRight: '1.2em' } },
                 xAxis: { label: { angle: 0 } }
             }
         }
@@ -39,7 +39,7 @@ function anim_1000_1010(chart) {
                 plot: {
                     paddingLeft: '9em',
                     marker: { label: { position: 'center' } },
-                    yAxis: { label: { paddingRight: '1.3em' } },
+                    yAxis: { label: { paddingRight: '1.2em' } },
                     xAxis: { label: { angle: 0 } }
                 }
             }
@@ -86,7 +86,7 @@ function anim_1000_1010(chart) {
                 plot: {
                     paddingLeft: '9em',
                     marker: { label: { position: 'right' } },
-                    yAxis: { label: { paddingRight: '1.3em' } },
+                    yAxis: { label: { paddingRight: '1.2em' } },
                     xAxis: { label: { angle: 0 } }
                 }
             }

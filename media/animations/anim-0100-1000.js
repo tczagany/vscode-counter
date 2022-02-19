@@ -15,7 +15,7 @@ function anim_0100_1000(chart) {
             plot: {
                 paddingLeft: '9em',
                 marker: { label: { position: 'center' } },
-                yAxis: { label: { paddingRight: '1.3em' } },
+                yAxis: { label: { paddingRight: '1.2em' } },
                 xAxis: { label: { angle: 0 } }
             }
         }

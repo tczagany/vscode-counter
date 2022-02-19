@@ -13,6 +13,7 @@ function anim_init(chart) {
             legend: null
         },
         style: {
+            fontSize:'1.1em',
             backgroundColor: '#00000000',
             logo: { filter: 'opacity(0)' },
             legend: { width: '9em', marker: { size: '11' }, paddingLeft: '0', paddingRight: '0' },
@@ -22,12 +23,12 @@ function anim_init(chart) {
                 yAxis: {
                     color: 'rgba(130,130,130,0.2)',
                     interlacing: { color: 'rgba(126,126,126,0.08)' },
-                    label: { paddingRight: '1em' }
+                    label: { paddingRight: '1.2em' }
                 },
                 xAxis: {
                     color: 'rgba(130,130,130,0.2)',
                     interlacing: { color: 'rgba(126,126,126,0.08)' },
-                    label: { angle: 0 }, title: { paddingTop: '2.2em' }
+                    label: { paddingTop: '0.9em', angle: 0 }, title: { paddingTop: '2.2em' }
                 }
             }
         }
