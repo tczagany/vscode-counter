@@ -1,4 +1,4 @@
-function nav_anim_01xx_filter(chart, dirLevel) {
+function nav_anim_01xx_filter_fw(chart, dirLevel) {
 
     let crDir = 'dir' + (dirLevel - 1);
     let nextDir = 'dir' + dirLevel;

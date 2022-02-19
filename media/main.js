@@ -117,11 +117,11 @@ function applyFilter() {
         disableControls(false, 'info');
         updateCtrlState();
         if (state_lc) {
-            let code = 'nav_anim_10xx_filter(navChart, dirFilter.length).then(() => disableControls(false, "nav"))';
+            let code = 'nav_anim_10xx_filter_fw(navChart, dirFilter.length).then(() => disableControls(false, "nav"))';
             evaluate(code);
         }
         else {
-            let code = 'nav_anim_01xx_filter(navChart, dirFilter.length).then(() => disableControls(false, "nav"))';
+            let code = 'nav_anim_01xx_filter_fw(navChart, dirFilter.length).then(() => disableControls(false, "nav"))';
             evaluate(code);
         }    
     })
@@ -183,16 +183,50 @@ function onBackClick() {
         updateCtrlState();
         disableControls(true, "start");
         if (state_lc) {
-            let code = 'nav_anim_10xx_filter_up(navChart, dirFilter.length - 1).then(() => disableControls(false, "nav"))';
+            let code = 'nav_anim_10xx_filter_bw(navChart, dirFilter.length - 1).then(() => applyBackFilter())';
             evaluate(code);
         }
         else {
-            let code = 'nav_anim_01xx_filter_up(navChart, dirFilter.length - 1).then(() => disableControls(false, "nav"))';
+            let code = 'nav_anim_01xx_filter_bw(navChart, dirFilter.length - 1).then(() => applyBackFilter())';
             evaluate(code);
         }
     }
     else
         vscode.postMessage({ command: 'showinfo', text: 'Filtering is not possible!' });
+}
+
+function applyBackFilter() {
+    dirFilter.pop();
+    let promise1 = infoChart.animate({
+		data: {
+			filter: (record) => {
+                for(let i = 0; i < dirFilter.length; i++) {
+                    let name = 'dir' + i;
+                    let value = dirFilter[i];
+                    if (record[name] != value)
+                        return false;
+                }
+				return true;
+            }
+		}
+	});
+    let promise2 = navChart.animate({
+		data: {
+			filter: (record) => {
+                for(let i = 0; i < dirFilter.length; i++) {
+                    let name = 'dir' + i;
+                    let value = dirFilter[i];
+                    if (record[name] != value)
+                        return false;
+                }
+				return true;
+            }
+		}
+	});
+    Promise.all([promise1, promise2]).then(() => {
+        disableControls(false, 'info');
+        disableControls(false, "nav");
+    });
 }
 
 function onZoomClick() {
