@@ -62,7 +62,7 @@ function anim_1000_1010(chart) {
             style: {
                 plot: {
                     paddingLeft: '9em',
-                    marker: { label: { position: 'right' } }
+                    marker: { label: { position: 'right' } },
                     xAxis: { label: { angle: 0 } }
                 }
             }

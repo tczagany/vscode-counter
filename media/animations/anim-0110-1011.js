@@ -21,7 +21,7 @@ function anim_0110_1011(chart) {
             }
         }
     },
-        { duration: 0.5 }
+        { duration: 0.2 }
     )
 
         .then(chart => chart.animate({
@@ -44,7 +44,7 @@ function anim_0110_1011(chart) {
                 }
             }
         },
-            { duration: 0.5 }
+            { duration: 0.2 }
         ))
 
         .then(chart => chart.animate({
@@ -67,6 +67,6 @@ function anim_0110_1011(chart) {
                 }
             }
         },
-            { duration: 2 }
+            { duration: 1.6 }
         ));
 }

@@ -67,7 +67,7 @@ function anim_1010_0110(chart) {
                 }
             }
         },
-            { duration: 2 }
+            { duration: 1.6 }
         ))
 
         .then(chart => chart.animate({

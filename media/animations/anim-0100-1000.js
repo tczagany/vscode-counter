@@ -20,6 +20,6 @@ function anim_0100_1000(chart) {
             }
         }
     },
-        { duration: 1 }
+        { duration: 2 }
     );
 }

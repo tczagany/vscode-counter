@@ -21,7 +21,9 @@ function nav_anim_01xx_filter_bw(chart, dirLevel) {
                 y: { set: ['$count', crDir] }, x: { set: [prevDir, crDir] }
             }
         }
-    }))
+    },
+    { duration: 1 }
+    ))
 
     .then(chart => chart.animate({
         config: {
@@ -29,7 +31,9 @@ function nav_anim_01xx_filter_bw(chart, dirLevel) {
                 y: { set: ['$count', crDir] }, x: { set: [prevDir] }
             }
         }
-    }))
+    },
+    { duration: 0.5 }
+    ))
 
     .then(chart => chart.animate({
         config: {
@@ -38,5 +42,7 @@ function nav_anim_01xx_filter_bw(chart, dirLevel) {
             },
             label: { set: ['$count'] }
         }
-    }));
+    },
+    { duration: 0.5 }
+    ));
 }

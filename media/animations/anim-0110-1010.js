@@ -70,7 +70,7 @@ function anim_0110_1010(chart) {
                 }
             }
         },
-            { duration: 2 }
+            { duration: 1.6 }
         ))
 
         .then(chart => chart.animate({
@@ -90,7 +90,7 @@ function anim_0110_1010(chart) {
                 plot: {
                     paddingLeft: '9em',
                     marker: { label: { position: 'right' } },
-                    yAxis: { label: { paddingRight: '1.3em' } },
+                    yAxis: { label: { fontSize: '1em', paddingRight: '1.3em' } },
                     xAxis: { label: { angle: 0 } }
                 }
             }

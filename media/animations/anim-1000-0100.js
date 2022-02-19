@@ -19,6 +19,6 @@ function anim_1000_0100(chart) {
             }
         }
     },
-        { duration: 1 }
+        { duration: 2 }
     );
 }

@@ -41,7 +41,7 @@ function anim_1011_1010(chart) {
                 plot: {
                     paddingLeft: '9em',
                     marker: { label: { position: 'right' } },
-                    yAxis: { label: { paddingRight: '1.3em' } },
+                    yAxis: { label: { fontSize: '1em', paddingRight: '1.3em' } },
                     xAxis: { label: { angle: 0 } }
                 }
             }

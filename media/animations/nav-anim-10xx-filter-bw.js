@@ -19,7 +19,9 @@ function nav_anim_10xx_filter_bw(chart, dirLevel) {
                 y: { set: [prevDir, crDir] }, x: { set: ['code', crDir] }
             }
         }
-    }))
+    },
+    { duration: 1 }
+    ))
 
     .then(chart => chart.animate({
         config: {
@@ -27,7 +29,9 @@ function nav_anim_10xx_filter_bw(chart, dirLevel) {
                 y: { set: [prevDir] }, x: { set: ['code', crDir] }
             }
         }
-    }))
+    },
+    { duration: 0.5 }
+    ))
 
     .then(chart => chart.animate({
         config: {
@@ -36,5 +40,7 @@ function nav_anim_10xx_filter_bw(chart, dirLevel) {
             },
             label: { set: ['code'] }
         }
-    }));
+    },
+    { duration: 0.5 }
+    ));
 }

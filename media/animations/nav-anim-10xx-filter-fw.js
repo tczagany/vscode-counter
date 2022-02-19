@@ -16,8 +16,8 @@ function nav_anim_10xx_filter_fw(chart, dirLevel) {
         },
         style: {
             plot: {
-                marker: { label: { position: 'right'/*, fontSize: '1em'*/ } },
-                xAxis: { label: { angle: 0/*, fontSize:  '1em'*/ } }
+                marker: { label: { position: 'right' } },
+                xAxis: { label: { angle: 0 } }
             }
         }
     },
@@ -33,8 +33,8 @@ function nav_anim_10xx_filter_fw(chart, dirLevel) {
             },
             style: {
                 plot: {
-                    marker: { label: { position: 'right'/*, fontSize: '1em'*/ } },
-                    xAxis: { label: { angle: 0/*, fontSize:  '1em'*/ } }
+                    marker: { label: { position: 'right' } },
+                    xAxis: { label: { angle: 0 } }
                 }
             }
         },
@@ -51,8 +51,8 @@ function nav_anim_10xx_filter_fw(chart, dirLevel) {
             },
             style: {
                 plot: {
-                    marker: { label: { position: 'right'/*, fontSize: '1em'*/ } },
-                    xAxis: { label: { angle: 0/*, fontSize:  '1em'*/ } }
+                    marker: { label: { position: 'right' } },
+                    xAxis: { label: { angle: 0 } }
                 }
             }
         },
