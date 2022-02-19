@@ -16,13 +16,13 @@ function nav_anim_01xx_filter_fw(chart, dirLevel) {
         },
         style: {
             plot: {
-                paddingLeft: '13em',                
-                marker: { label: { position: 'center', fontSize: '1.3em'} },
-                    xAxis: { label: { angle: 0, fontSize:  '1em' },
+//                paddingLeft: '8em',                
+                marker: { label: { position: 'top', fontSize: '1em'} },
+                    xAxis: { label: { angle: -0.7, fontSize:  '1em' },
                              title: { paddingTop: '2.5em' } }
             }
         }},
-        { duration: 1 }
+        { duration: 2 }
     )
 
     .then(chart => chart.animate({
@@ -34,13 +34,13 @@ function nav_anim_01xx_filter_fw(chart, dirLevel) {
         },
         style: {
             plot: {
-                paddingLeft: '13em',                
-                marker: { label: { position: 'center', fontSize: '1.3em'} },
-                    xAxis: { label: { angle: 0, fontSize:  '1em' },
+//                paddingLeft: '8em',                
+                marker: { label: { position: 'top', fontSize: '1em'} },
+                    xAxis: { label: { angle: -0.7, fontSize:  '0.9em' },
                              title: { paddingTop: '2.5em' } }
             }
         }},
-        { duration: 1 }
+        { duration: 2 }
     ))
 
     .then(chart => chart.animate({
@@ -53,12 +53,12 @@ function nav_anim_01xx_filter_fw(chart, dirLevel) {
         },
         style: {
             plot: {
-                paddingLeft: '13em',                
-                marker: { label: { position: 'center', fontSize: '1.3em'} },
-                    xAxis: { label: { angle: 0, fontSize:  '1em' },
+                paddingLeft: '8em',                
+                marker: { label: { position: 'top', fontSize: '1em'} },
+                    xAxis: { label: { angle: -0.7, fontSize:  '0.8em' },
                              title: { paddingTop: '2.5em' } }
             }
         }},
-        { duration: 1 }
+        { duration: 2 }
     ));
 }

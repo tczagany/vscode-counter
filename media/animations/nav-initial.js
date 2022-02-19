@@ -5,23 +5,33 @@ function nav_anim_init(chart) {
         config: {
             channels: {
                 y: { set: ['dir0'], range: {min: '0%', max: '100%' } },
-                x: { set: ['code'], range: { min: '0%', max: '100%' } },
+                x: { set: ['code'], range: { min: '0%', max: '110%' } },
                 color: { set: null },
                 label: { set: ['code'] },
             },
-            title: null
+            title: null,
+            legend: null
         },
         style: {
-            fontSize: '13',
-            logo:{filter: 'lightness(-0.2)' },
+            fontSize: '12',
+            logo:{filter: 'lightness(1)' },
             plot: {
-                marker: { label: { position: 'center', fontSize:'1.3em'} },
-                yAxis: { label: { fontSize: '1em', paddingRight: '1.3em'} },
-                xAxis: { label: { angle: 0, fontSize:  '1em' }, title: { paddingTop: '2.5em' } }
+                paddingLeft: '6em',
+                paddingRight: '2em',
+                marker: { label: { fontSize:'1em'} },
+                yAxis: { label: { fontSize: '1em', paddingRight: '1em'} },
+                xAxis: { label: { angle: 0, fontSize:  '1em' }, title: { paddingTop: '2.2em' } }
             }
         }
     },
     {
-        duration: 1
-    });
+        duration: 0.2
+    })
+    
+    .then(chart => {
+        chart.feature('tooltip',true);
+        return chart;
+    })
+    
+    ;
 }

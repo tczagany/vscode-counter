@@ -13,10 +13,9 @@ function anim_0100_0110(chart) {
         },
         style: {
             plot: {
-                paddingLeft: '13em',                
-                marker: { label: { position: 'center', fontSize: '1.3em'} },
-                xAxis: { label: { angle: -0.5, fontSize:  '1em' },
-                             title: { paddingTop: '2.5em' } }
+                paddingLeft: '9em',                
+                marker: { label: { position: 'center'} },
+                xAxis: { label: { angle: -0.7 } }
             }
         }},
         { duration: 0.1 }
@@ -35,10 +34,9 @@ function anim_0100_0110(chart) {
         },
         style: {
             plot: {
-                paddingLeft: '13em',                
-                marker: { label: { position: 'center', fontSize: '1.3em'} },
-                xAxis: { label: { angle: -0.5, fontSize:  '1em' },
-                             title: { paddingTop: '2.5em' } }
+                paddingLeft: '9em',                
+                marker: { label: { position: 'center'} },
+                xAxis: { label: { angle: -0.7 } }
             }
         }},
         { duration: 0.5 }
@@ -54,14 +52,13 @@ function anim_0100_0110(chart) {
             title: null, //  '9 File count + types 1',
             sort: 'byValue',
             legend: null,
-                reverse: true,
+            reverse: true,
         },
         style: {
             plot: {
-                paddingLeft: '13em',                
-                marker: { label: { position: 'top', fontSize: '1em'} },
-                xAxis: { label: { angle: -0.5, fontSize:  '1em' },
-                             title: { paddingTop: '2.5em' } }
+                paddingLeft: '9em',                
+                marker: { label: { position: 'top'} },
+                xAxis: { label: { angle: -0.7 }}
             }
         }},
         { duration: 2 }
@@ -78,14 +75,13 @@ function anim_0100_0110(chart) {
             title: null, //  '10 File count + types 2',
             sort: 'byValue',
             legend: null,
-                reverse: true,
+            reverse: true,
         },
         style: {
             plot: {
-                paddingLeft: '13em',                
-                marker: { label: { position: 'top', fontSize: '1em'} },
-                xAxis: { label: { angle: -0.5, fontSize:  '1em' },
-                             title: { paddingTop: '2.5em' } }
+                paddingLeft: '9em',                
+                marker: { label: { position: 'top'} },
+                xAxis: { label: { angle: -0.7 } }
             }
         }},
         { duration: 0.5 }

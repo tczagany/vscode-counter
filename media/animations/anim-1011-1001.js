@@ -14,10 +14,9 @@ function anim_1011_1001(chart) {
         },
         style: {
             plot: {
-                paddingLeft: '0.6em',
+                paddingLeft: '0em',
                 yAxis: { label: { fontSize: 0 } },
-                xAxis: { label: { angle: 0, fontSize:  '1em' },
-                             title: { paddingTop: '2.5em' } }
+                xAxis: { label: { angle: 0 } }
             }
         }},
         { duration: 0.1 }
@@ -34,14 +33,13 @@ function anim_1011_1001(chart) {
             title: null, //  '7 code + Files 1',
             sort: 'byValue',
             legend: null,
-                reverse: false,
+            reverse: false,
         },
         style: {
             plot: {
-                paddingLeft: '13em',
+                paddingLeft: '9em',
                 yAxis: { label: { fontSize: 0  } },
-                xAxis: { label: { angle: 0, fontSize:  '1em' },
-                             title: { paddingTop: '2.5em' } }
+                xAxis: { label: { angle: 0 } }
             }
         }},
         { duration: 2 }

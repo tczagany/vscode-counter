@@ -13,10 +13,9 @@ function anim_1000_0100(chart) {
         },
         style: {
             plot: {
-                paddingLeft: '13em',                
-                marker: { label: { position: 'center', fontSize: '1.3em'} },
-                    xAxis: { label: { angle: 0, fontSize:  '1em' },
-                             title: { paddingTop: '2.5em' } }
+                paddingLeft: '9em',                
+                marker: { label: { position: 'center'} },
+                xAxis: { label: { angle: 0 } }
             }
         }},
         { duration: 1 }
