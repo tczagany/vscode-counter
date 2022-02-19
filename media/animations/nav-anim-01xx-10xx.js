@@ -13,12 +13,12 @@ function nav_anim_01xx_10xx(chart, dirLevel) {
         },
         style: {
             plot: {
-                paddingLeft: '8em',                
+//                paddingLeft: '8em',                
                 marker: { label: { position: 'right', fontSize: '1em'} },
                     xAxis: { label: { angle: 0, fontSize:  '1em' },
                              title: { paddingTop: '2.5em' } }
             }
         }},
-        { duration: 1 }
+        { duration: 2 }
     );
 }

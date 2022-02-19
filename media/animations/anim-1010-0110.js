@@ -14,11 +14,10 @@ function anim_1010_0110(chart) {
         },
         style: {
             plot: {
-                paddingLeft: '13em',
-                marker: { label: { position: 'right', fontSize:'1em'} },
-                yAxis: { label: { fontSize: '1.2em', paddingRight: '1.3em' } },
-                xAxis: { label: { angle: 0, fontSize:  '1em' },
-                				 title: { paddingTop: '2.5em' } }
+                paddingLeft: '9em',
+                marker: { label: { position: 'right'} },
+                yAxis: { label: { fontSize: '1em', paddingRight: '1.3em' } },
+                xAxis: { label: { angle: 0 } }
             }
         }},
         { duration: 0.1 }
@@ -38,10 +37,9 @@ function anim_1010_0110(chart) {
         },
         style: {
             plot: {
-                paddingLeft: '13em',
+                paddingLeft: '9em',
                 yAxis: { label: { fontSize: '0em', paddingRight: '1.3em' } },
-                xAxis: { label: { angle: 0, fontSize:  '1em' },
-                				 title: { paddingTop: '2.5em' } }
+                xAxis: { label: { angle: 0 } }
             }
         }},
         { duration: 0.1 }
@@ -61,9 +59,9 @@ function anim_1010_0110(chart) {
         },
         style: {
             plot: {
-                paddingLeft: '13em',                
+                paddingLeft: '9em',                
                 marker: { label: { position: 'top', fontSize: '1em'} },
-                xAxis: { label: { angle: -0.5,  fontSize: '1em' } }
+                xAxis: { label: { angle: -0.7 } }
             }
         }},
         { duration: 2 }
@@ -84,9 +82,9 @@ function anim_1010_0110(chart) {
         },
         style: {
             plot: {
-                paddingLeft: '13em',                
-                marker: { label: { position: 'top', fontSize: '1em'} },
-                xAxis: { label: { angle: -0.5, fontSize:  '1em' } }
+                paddingLeft: '9em',                
+                marker: { label: { position: 'top'} },
+                xAxis: { label: { angle: -0.7 } }
             }
         }},
         { duration: 0.5 }

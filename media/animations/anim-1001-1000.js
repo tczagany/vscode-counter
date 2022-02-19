@@ -15,10 +15,9 @@ function anim_1001_1000(chart) {
         },
         style: {
             plot: {
-                paddingLeft: '13em',
+                paddingLeft: '9em',
                 yAxis: { label: { fontSize: 0  } },
-                    xAxis: { label: { angle: 0, fontSize:  '1em' },
-                             title: { paddingTop: '2.5em' } }
+                xAxis: { label: { angle: 0 } }
             }
         }},
         { duration: 0.1 }
@@ -36,15 +35,13 @@ function anim_1001_1000(chart) {
         sort: 'byValue'
         },
         style: {
-            fontSize: '13',
             logo:{filter: 'lightness(-0.2)' },
         legend:{paddingLeft:'5.789473684'},
         plot: {
-            paddingLeft: '13em',
-            marker: { label: { position: 'center', fontSize:'1.3em'} },
+            paddingLeft: '9em',
+            marker: { label: { position: 'center'} },
             yAxis: { label: { fontSize: 0, paddingRight: '1.3em'} },
-            xAxis: { label: { angle: 0, fontSize:  '1em' },
-                             title: { paddingTop: '2.5em' } }
+            xAxis: { label: { angle: 0 } }
         }
         }},
         { duration: 2 }
@@ -61,14 +58,13 @@ function anim_1001_1000(chart) {
             title: null
         },
         style: {
-            fontSize: '13',
             logo:{filter: 'lightness(-0.2)' },
             legend:{paddingLeft:'5.789473684'},
             plot: {
-                paddingLeft: '13em',
-                marker: { label: { position: 'center', fontSize:'1.3em'} },
+                paddingLeft: '9em',
+                marker: { label: { position: 'center'} },
                 yAxis: { label: { fontSize: '1em', paddingRight: '1.3em'} },
-                xAxis: { label: { angle: 0, fontSize:  '1em' }, title: { paddingTop: '2.5em' } }
+                xAxis: { label: { angle: 0 } }
             }
         }},
         { duration: 0.5 }

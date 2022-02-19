@@ -15,10 +15,9 @@ function anim_1001_0100(chart) {
         },
         style: {
             plot: {
-                paddingLeft: '13em',
+                paddingLeft: '9em',
                 yAxis: { label: { fontSize: 0  } },
-                    xAxis: { label: { angle: 0, fontSize:  '1em' },
-                             title: { paddingTop: '2.5em' } }
+                xAxis: { label: { angle: 0 } }
             }
         }},
         { duration: 1 }
@@ -39,10 +38,9 @@ function anim_1001_0100(chart) {
         },
         style: {
             plot: {
-                paddingLeft: '13em',
+                paddingLeft: '9em',
                 yAxis: { label: { fontSize: 0  } },
-                    xAxis: { label: { angle: 0, fontSize:  '1em' },
-                             title: { paddingTop: '2.5em' } }
+                xAxis: { label: { angle: 0 } }
             }
         }},
         { duration: 1 }
@@ -61,10 +59,9 @@ function anim_1001_0100(chart) {
         },
         style: {
             plot: {
-                paddingLeft: '13em',                
-                marker: { label: { position: 'center', fontSize: '1.3em'} },
-                    xAxis: { label: { angle: 0, fontSize:  '1em' },
-                             title: { paddingTop: '2.5em' } }
+                paddingLeft: '9em',                
+                marker: { label: { position: 'center'} },
+                xAxis: { label: { angle: 0 } }
             }
         }},
         { duration: 1 }

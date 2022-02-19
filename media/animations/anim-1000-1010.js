@@ -11,17 +11,13 @@ function anim_1000_1010(chart) {
             title: null, //1 code 1
         },
         style: {
-            fontSize: '13',
             logo: { filter: 'lightness(-0.2)' },
             legend: { paddingLeft: '5.789473684' },
             plot: {
-                paddingLeft: '13em',
-                marker: { label: { position: 'center', fontSize: '1.3em' } },
-                yAxis: { label: { fontSize: '1.2em', paddingRight: '1.3em' } },
-                xAxis: {
-                    label: { angle: 0, fontSize: '1em' },
-                    title: { paddingTop: '2.5em' }
-                }
+                paddingLeft: '9em',
+                marker: { label: { position: 'center' } },
+                yAxis: { label: { fontSize: '1em', paddingRight: '1.3em' } },
+                xAxis: { label: { angle: 0 } }
             }
         }
     },
@@ -42,13 +38,10 @@ function anim_1000_1010(chart) {
             },
             style: {
                 plot: {
-                    paddingLeft: '13em',
-                    marker: { label: { position: 'center', fontSize: '1.3em' } },
-                    yAxis: { label: { fontSize: '1.2em', paddingRight: '1.3em' } },
-                    xAxis: {
-                        label: { angle: 0, fontSize: '1em' },
-                        title: { paddingTop: '2.5em' }
-                    }
+                    paddingLeft: '9em',
+                    marker: { label: { position: 'center' } },
+                    yAxis: { label: { fontSize: '1em', paddingRight: '1.3em' } },
+                    xAxis: { label: { angle: 0 } }
                 }
             }
         },
@@ -69,13 +62,10 @@ function anim_1000_1010(chart) {
             },
             style: {
                 plot: {
-                    paddingLeft: '13em',
-                    marker: { label: { position: 'right', fontSize: '1em' } },
-                    yAxis: { label: { fontSize: '1.2em' } },
-                    xAxis: {
-                        label: { angle: 0, fontSize: '1em' },
-                        title: { paddingTop: '2.5em' }
-                    }
+                    paddingLeft: '9em',
+                    marker: { label: { position: 'right' } },
+                    yAxis: { label: { fontSize: '1em' } },
+                    xAxis: { label: { angle: 0 } }
                 }
             }
         },
@@ -96,13 +86,10 @@ function anim_1000_1010(chart) {
             },
             style: {
                 plot: {
-                    paddingLeft: '13em',
-                    marker: { label: { position: 'right', fontSize: '1em' } },
-                    yAxis: { label: { fontSize: '1.2em', paddingRight: '1.3em' } },
-                    xAxis: {
-                        label: { angle: 0, fontSize: '1em' },
-                        title: { paddingTop: '2.5em' }
-                    }
+                    paddingLeft: '9em',
+                    marker: { label: { position: 'right' } },
+                    yAxis: { label: { fontSize: '1em', paddingRight: '1.3em' } },
+                    xAxis: { label: { angle: 0, fontSize: '1em' } }
                 }
             }
         },

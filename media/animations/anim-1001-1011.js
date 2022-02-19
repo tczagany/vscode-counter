@@ -15,10 +15,9 @@ function anim_1001_1011(chart) {
         },
         style: {
             plot: {
-                paddingLeft: '13em',
+                paddingLeft: '9em',
                 yAxis: { label: { fontSize: 0  } },
-                xAxis: { label: { angle: 0, fontSize:  '1em' },
-                             title: { paddingTop: '2.5em' } }
+                xAxis: { label: { angle: 0 } }
             }
         }},
         { duration: 0.1 }
@@ -37,11 +36,11 @@ function anim_1001_1011(chart) {
                 reverse: true,
         },
         style: {
+            legend:{paddingRight: '0'},
             plot: {
-                paddingLeft: '0.6em',
+                paddingLeft: '0em',
                 yAxis: { label: { fontSize: 0 } },
-                xAxis: { label: { angle: 0, fontSize:  '1em' },
-                             title: { paddingTop: '2.5em' } }
+                xAxis: { label: { angle: 0 } }
             }
         }},
         { duration: 2 }
