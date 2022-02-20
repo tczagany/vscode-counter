@@ -10,7 +10,7 @@ function nav_anim_10xx_filter_bw(chart, dirLevel) {
                 label: { set: null }
             }
         }},
-        { duration: 1 }
+        { duration: 0.4 }
     )
 
     .then(chart => chart.animate({
@@ -20,7 +20,7 @@ function nav_anim_10xx_filter_bw(chart, dirLevel) {
             }
         }
     },
-    { duration: 1 }
+    { duration: 0.4 }
     ))
 
     .then(chart => chart.animate({
@@ -30,7 +30,7 @@ function nav_anim_10xx_filter_bw(chart, dirLevel) {
             }
         }
     },
-    { duration: 0.5 }
+    { duration: 0.4 }
     ))
 
     .then(chart => chart.animate({
@@ -41,6 +41,6 @@ function nav_anim_10xx_filter_bw(chart, dirLevel) {
             label: { set: ['code'] }
         }
     },
-    { duration: 0.5 }
+    { duration: 0.4 }
     ));
 }
