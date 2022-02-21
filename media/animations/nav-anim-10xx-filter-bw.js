@@ -39,6 +39,11 @@ function nav_anim_10xx_filter_bw(chart, dirLevel) {
                 y: { set: [prevDir] }, x: { set: ['code'] }
             },
             label: { set: ['code'] }
+        },
+        style: {
+            plot: {
+                xAxis: { label: { fontSize: '1em' } }
+            }
         }
     },
     { duration: 0.4 }

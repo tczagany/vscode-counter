@@ -34,7 +34,7 @@ function nav_anim_01xx_filter_fw(chart, dirLevel) {
             style: {
                 plot: {
                     marker: { label: { position: 'top' } },
-                    xAxis: { label: { angle: -0.7, fontSize: '0.9em' } }
+                    xAxis: { label: { angle: -0.7, fontSize: '0.7em' } }
                 }
             }
         },
