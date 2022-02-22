@@ -6,7 +6,8 @@ function nav_anim_10xx_filter_bw(chart, dirLevel) {
     return chart.animate({
         config: {
             channels: {
-                y: { set: [crDir] }, x: { set: ['code', prevDir] },
+                y: { set: [crDir] }, 
+                x: { set: ['code'] },
                 label: { set: null }
             }
         }},
@@ -16,7 +17,8 @@ function nav_anim_10xx_filter_bw(chart, dirLevel) {
     .then(chart => chart.animate({
         config: {
             channels: {
-                y: { set: [prevDir, crDir] }, x: { set: ['code', crDir] }
+                y: { set: null }, 
+                x: { set: ['code', crDir] }
             }
         }
     },
@@ -26,24 +28,26 @@ function nav_anim_10xx_filter_bw(chart, dirLevel) {
     .then(chart => chart.animate({
         config: {
             channels: {
-                y: { set: [prevDir] }, x: { set: ['code', crDir] }
+                y: { set: [prevDir] }, 
+                x: { set: ['code'] }
             }
-        }
-    },
-    { duration: 0.4 }
-    ))
-
-    .then(chart => chart.animate({
-        config: {
-            channels: {
-                y: { set: [prevDir] }, x: { set: ['code'] }
-            },
-            label: { set: ['code'] }
         },
         style: {
             plot: {
                 xAxis: { label: { fontSize: '1em' } }
             }
+        }
+    },
+    { duration: 0.4 }
+    ))
+
+    .then(chart => chart.animate({
+        config: {
+            channels: {
+                y: { set: [prevDir] }, 
+                x: { set: ['code'] }
+            },
+            label: { set: ['code'] }
         }
     },
     { duration: 0.4 }

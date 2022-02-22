@@ -6,7 +6,7 @@ function nav_anim_01xx_filter_bw(chart, dirLevel) {
     return chart.animate({
         config: {
             channels: {
-                y: { set: ['$count', prevDir], range: {min: '0%', max: '100%' } },
+                y: { set: ['$count'], range: {min: '0%', max: '100%' } },
                 x: { set: [crDir] },
                 label: { set: null }
             },
@@ -18,7 +18,8 @@ function nav_anim_01xx_filter_bw(chart, dirLevel) {
     .then(chart => chart.animate({
         config: {
             channels: {
-                y: { set: ['$count', crDir] }, x: { set: [prevDir, crDir] }
+                y: { set: ['$count', crDir ] }, 
+                x: { set: null }
             }
         }
     },
@@ -28,24 +29,26 @@ function nav_anim_01xx_filter_bw(chart, dirLevel) {
     .then(chart => chart.animate({
         config: {
             channels: {
-                y: { set: ['$count', crDir] }, x: { set: [prevDir] }
+                y: { set: ['$count'] }, 
+                x: { set: prevDir }
             }
-        }
-    },
-    { duration: 0.4 }
-    ))
-
-    .then(chart => chart.animate({
-        config: {
-            channels: {
-                y: { set: ['$count'] }, x: { set: [prevDir] }
-            },
-            label: { set: ['$count'] }
         },
         style: {
             plot: {
                 xAxis: { label: { fontSize: '1em' } }
             }
+        }
+    },
+    { duration: 0.4 }
+    ))
+
+    .then(chart => chart.animate({
+        config: {
+            channels: {
+                y: { set: ['$count'] }, 
+                x: { set: [prevDir] }
+            },
+            label: { set: ['$count'] }
         }
     },
     { duration: 0.4 }
