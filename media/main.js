@@ -61,7 +61,7 @@ function animationError(errType, e) {
 
 function navChartClick(event) {
     if (event.data.marker != undefined) {
-        if (dirMaxDepth - 1 > dirFilter.length) {
+        if (dirMaxDepth > dirFilter.length) {
             let level = dirFilter.length;
             let levelStr = 'Folder level ' + level.toString();
             let filterStr = event.data.marker.categories[levelStr];
@@ -74,7 +74,6 @@ function navChartClick(event) {
 }
 
 function evaluate(code) {
-    vscode.postMessage({ command: 'showlog', text: 'eval ' + code });
     try {
         let errLoggedCode = code +
             '.catch((e) => { animationError("vizzu" , e); })';
@@ -102,14 +101,18 @@ function applyFilter() {
     Promise.all([promise1, promise2]).then(() => {
         disableControls(false, 'info');
         updateCtrlState();
-        if (state_lc) {
-            let code = 'nav_anim_10xx_filter_fw(navChart, dirFilter.length).then(() => disableControls(false, "nav"))';
-            evaluate(code);
+        if (dirMaxDepth > dirFilter.length) {
+            if (state_lc) {
+                let code = 'nav_anim_10xx_filter_fw(navChart, dirFilter.length).then(() => disableControls(false, "nav"))';
+                evaluate(code);
+            }
+            else {
+                let code = 'nav_anim_01xx_filter_fw(navChart, dirFilter.length).then(() => disableControls(false, "nav"))';
+                evaluate(code);
+            }
         }
-        else {
-            let code = 'nav_anim_01xx_filter_fw(navChart, dirFilter.length).then(() => disableControls(false, "nav"))';
-            evaluate(code);
-        }    
+        else
+            disableControls(false, "nav");
     })
     .catch((e) => {
         animationError('filtering', e);
@@ -144,7 +147,6 @@ function updateCtrlState() {
 }
 
 function disableControls(disable, animClass) {
-    vscode.postMessage({ command: 'showlog', text: 'disableControls class ' + animClass });
     if (animClass == 'start')
         activeAnimations = 'info nav';
     else
@@ -152,7 +154,6 @@ function disableControls(disable, animClass) {
     activeAnimations = activeAnimations.trim();
     if (animClass == 'err')
         activeAnimations = '';
-    vscode.postMessage({ command: 'showlog', text: 'disableControls anim ' + activeAnimations });
     if (animClass == 'start' || activeAnimations.length == 0) {
         document.getElementById('radio_file').disabled = disable;
         document.getElementById('radio_line').disabled = disable;
@@ -168,14 +169,18 @@ function onBackClick() {
     if (dirFilter.length > 0) {
         updateCtrlState();
         disableControls(true, "start");
-        if (state_lc) {
-            let code = 'nav_anim_10xx_filter_bw(navChart, dirFilter.length - 1).then(() => applyBackFilter())';
-            evaluate(code);
+        if (dirMaxDepth > dirFilter.length) {
+            if (state_lc) {
+                let code = 'nav_anim_10xx_filter_bw(navChart, dirFilter.length - 1).then(() => applyBackFilter())';
+                evaluate(code);
+            }
+            else {
+                let code = 'nav_anim_01xx_filter_bw(navChart, dirFilter.length - 1).then(() => applyBackFilter())';
+                evaluate(code);
+            }
         }
-        else {
-            let code = 'nav_anim_01xx_filter_bw(navChart, dirFilter.length - 1).then(() => applyBackFilter())';
-            evaluate(code);
-        }
+        else
+            applyBackFilter();
     }
     else
         vscode.postMessage({ command: 'showinfo', text: 'Filtering is not possible!' });
