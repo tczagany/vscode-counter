@@ -85,34 +85,20 @@ function evaluate(code) {
     }
 }
 
+function selectRecord(record) {
+    for(let i = 0; i < dirFilter.length; i++) {
+        let name = 'Folder level ' + i;
+        let value = dirFilter[i];
+        if (record[name] != value)
+            return false;
+    }
+    return true;
+}
+
 function applyFilter() {
     disableControls(true, 'start');
-    let promise1 = infoChart.animate({
-		data: {
-			filter: (record) => {
-                for(let i = 0; i < dirFilter.length; i++) {
-                    let name = 'Folder level ' + i;
-                    let value = dirFilter[i];
-                    if (record[name] != value)
-                        return false;
-                }
-				return true;
-            }
-		}
-	});
-    let promise2 = navChart.animate({
-		data: {
-			filter: (record) => {
-                for(let i = 0; i < dirFilter.length; i++) {
-                    let name = 'Folder level ' + i;
-                    let value = dirFilter[i];
-                    if (record[name] != value)
-                        return false;
-                }
-				return true;
-            }
-		}
-	});
+    let promise1 = nav_anim_record_filter(infoChart, (record) => selectRecord(record));
+    let promise2 = nav_anim_record_filter(navChart, (record) => selectRecord(record));
     Promise.all([promise1, promise2]).then(() => {
         disableControls(false, 'info');
         updateCtrlState();
@@ -197,32 +183,8 @@ function onBackClick() {
 
 function applyBackFilter() {
     dirFilter.pop();
-    let promise1 = infoChart.animate({
-		data: {
-			filter: (record) => {
-                for(let i = 0; i < dirFilter.length; i++) {
-                    let name = 'Folder level ' + i;
-                    let value = dirFilter[i];
-                    if (record[name] != value)
-                        return false;
-                }
-				return true;
-            }
-		}
-	});
-    let promise2 = navChart.animate({
-		data: {
-			filter: (record) => {
-                for(let i = 0; i < dirFilter.length; i++) {
-                    let name = 'Folder level ' + i;
-                    let value = dirFilter[i];
-                    if (record[name] != value)
-                        return false;
-                }
-				return true;
-            }
-		}
-	});
+    let promise1 = nav_anim_record_filter(infoChart, (record) => selectRecord(record));
+    let promise2 = nav_anim_record_filter(navChart, (record) => selectRecord(record));
     Promise.all([promise1, promise2]).then(() => {
         disableControls(false, 'info');
         disableControls(false, "nav");
