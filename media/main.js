@@ -5,7 +5,7 @@ let dirFilter = [];
 let dirMaxDepth = 0;
 let activeAnimations = '';
 
-let state_l = false;
+let state_l = true;
 let state_f = false;
 let restore_f = false;
 let disable_f = false;
