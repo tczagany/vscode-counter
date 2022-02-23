@@ -3,10 +3,10 @@ function nav_anim_01xx_10xx(chart, dirLevel) {
     return chart.animate({
         config: {
             channels: {
-                y: { set: ['dir' + dirLevel], range: { min: '0%', max: '100%' } },
-                x: { set: ['code'] },
+                y: { set: ['Folder level ' + dirLevel], range: { min: '0%', max: '100%' } },
+                x: { set: ['Line count'] },
                 color: { set: null },
-                label: { set: ['code'] },
+                label: { set: ['Line count'] },
             },
             title: null, //  '13 File count 2',
             legend: null

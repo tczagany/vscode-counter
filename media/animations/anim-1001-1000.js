@@ -3,10 +3,10 @@ function anim_1001_1000(chart) {
     return chart.animate({
         config: {
             channels: {
-                y: { set: ['file'], range: { min: '0%', max: '100%' } },
-                x: { set: ['code'] },
+                y: { set: ['File name'], range: { min: '0%', max: '100%' } },
+                x: { set: ['Line count'] },
                 label: { set: null },
-                color: { detach: ['type'] }
+                color: { detach: ['Language'] }
             },
             title: null, //  '7 code+ Files 1',
             sort: 'byValue',
@@ -28,7 +28,7 @@ function anim_1001_1000(chart) {
             config: {
                 channels: {
                     y: { set: null, range: { min: '0%', max: '100%' } },
-                    x: { set: ['code', 'file'], range: { min: '0%', max: '100%' } },
+                    x: { set: ['Line count', 'File name'], range: { min: '0%', max: '100%' } },
                     color: { set: null },
                     label: { set: null },
                 },
@@ -52,9 +52,9 @@ function anim_1001_1000(chart) {
             config: {
                 channels: {
                     y: { set: null, range: { min: '0%', max: '100%' } },
-                    x: { set: ['code'], range: { min: '0%', max: '100%' } },
+                    x: { set: ['Line count'], range: { min: '0%', max: '100%' } },
                     color: { set: null },
-                    label: { set: ['code'] },
+                    label: { set: ['Line count'] },
                 },
                 title: null
             },

@@ -1,7 +1,7 @@
 function nav_anim_01xx_filter_bw(chart, dirLevel) {
 
-    let crDir = 'dir' + (dirLevel + 1);
-    let prevDir = 'dir' + dirLevel;
+    let crDir = 'Folder level ' + (dirLevel + 1);
+    let prevDir = 'Folder level ' + dirLevel;
 
     return chart.animate({
         config: {

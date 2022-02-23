@@ -4,10 +4,10 @@ function anim_init(chart) {
     return chart.animate({
         config: {
             channels: {
-                y: { set: ['type'], range: { min: '0%', max: '100%' } },
-                x: { set: ['code'], range: { min: '0%', max: '100%' } },
-                color: { set: 'type' },
-                label: { set: ['code'] }
+                y: { set: ['Language'], range: { min: '0%', max: '100%' } },
+                x: { set: ['Line count'], range: { min: '0%', max: '100%' } },
+                color: { set: 'Language' },
+                label: { set: ['Line count'] }
             },
             legend: null,
             sort: 'none',

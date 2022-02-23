@@ -3,10 +3,10 @@ function anim_1010_1011(chart) {
     return chart.animate({
         config: {
             channels: {
-                y: { set: ['type'], range: { min: '0%', max: '100%' } },
-                x: { set: ['code'] },
-                color: 'type',
-                label: { set: ['code'] },
+                y: { set: ['Language'], range: { min: '0%', max: '100%' } },
+                x: { set: ['Line count'] },
+                color: 'Language',
+                label: { set: ['Line count'] },
             },
             title: null, //  '4 code + types 2',
             legend: null,
@@ -28,9 +28,9 @@ function anim_1010_1011(chart) {
         .then(chart => chart.animate({
             config: {
                 channels: {
-                    y: { set: ['type'], range: { min: '0%', max: '100%' } },
-                    x: { set: ['code', 'file'] },
-                    color: 'type',
+                    y: { set: ['Language'], range: { min: '0%', max: '100%' } },
+                    x: { set: ['Line count', 'File name'] },
+                    color: 'Language',
                     label: null
                 },
                 title: null, //  '5 code + types 3'
@@ -52,9 +52,9 @@ function anim_1010_1011(chart) {
         .then(chart => chart.animate({
             config: {
                 channels: {
-                    y: { set: ['type', 'file'], range: { min: '0%', max: '100%' } },
-                    x: { set: ['code'] },
-                    color: { set: ['type'] }
+                    y: { set: ['Language', 'File name'], range: { min: '0%', max: '100%' } },
+                    x: { set: ['Line count'] },
+                    color: { set: ['Language'] }
                 },
                 title: null, //  '6 code + types + Files 1',
                 legend: 'color',

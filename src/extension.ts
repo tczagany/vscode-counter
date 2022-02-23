@@ -708,11 +708,11 @@ class ResultFormatter {
         const maxNamelen = Math.max(...this.results.map(res => res.filename.length));
         const maxLanglen = Math.max(...[...this.langResultTable.keys()].map(l => l.length));
         const resultFormat = new TextTableFormatter(this.valueToString, { title: 'filename', width: maxNamelen }, { title: 'language', width: maxLanglen },
-            { title: 'code', width: 10 }, { title: 'comment', width: 10 }, { title: 'blank', width: 10 }, { title: 'total', width: 10 });
+            { title: 'Line count', width: 10 }, { title: 'comment', width: 10 }, { title: 'blank', width: 10 }, { title: 'total', width: 10 });
         const dirFormat = new TextTableFormatter(this.valueToString, { title: 'path', width: maxNamelen }, { title: 'files', width: 10 },
-            { title: 'code', width: 10 }, { title: 'comment', width: 10 }, { title: 'blank', width: 10 }, { title: 'total', width: 10 });
+            { title: 'Line count', width: 10 }, { title: 'comment', width: 10 }, { title: 'blank', width: 10 }, { title: 'total', width: 10 });
         const langFormat = new TextTableFormatter(this.valueToString, { title: 'language', width: maxLanglen }, { title: 'files', width: 10 },
-            { title: 'code', width: 10 }, { title: 'comment', width: 10 }, { title: 'blank', width: 10 }, { title: 'total', width: 10 });
+            { title: 'Line count', width: 10 }, { title: 'comment', width: 10 }, { title: 'blank', width: 10 }, { title: 'total', width: 10 });
         return [
             `Date : ${toLocalDateString(date)}`,
             `Directory : ${this.targetDirUri.fsPath}`,
@@ -778,7 +778,7 @@ class ResultFormatter {
         const dirFormat = new MarkdownTableFormatter(this.valueToString,
             { title: 'path', format: 'string' },
             { title: 'files', format: 'number' },
-            { title: 'code', format: 'number' },
+            { title: 'Line count', format: 'number' },
             { title: 'comment', format: 'number' },
             { title: 'blank', format: 'number' },
             { title: 'total', format: 'number' }
@@ -786,7 +786,7 @@ class ResultFormatter {
         const langFormat = new MarkdownTableFormatter(this.valueToString,
             { title: 'language', format: 'string' },
             { title: 'files', format: 'number' },
-            { title: 'code', format: 'number' },
+            { title: 'Line count', format: 'number' },
             { title: 'comment', format: 'number' },
             { title: 'blank', format: 'number' },
             { title: 'total', format: 'number' }
@@ -807,7 +807,7 @@ class ResultFormatter {
         const resultFormat = new MarkdownTableFormatter(this.valueToString,
             { title: 'filename', format: 'uri' },
             { title: 'language', format: 'string' },
-            { title: 'code', format: 'number' },
+            { title: 'Line count', format: 'number' },
             { title: 'comment', format: 'number' },
             { title: 'blank', format: 'number' },
             { title: 'total', format: 'number' }

@@ -4,10 +4,10 @@ function nav_anim_init(chart) {
     return chart.animate({
         config: {
             channels: {
-                y: { set: ['dir0'], range: { min: '0%', max: '100%' } },
-                x: { set: ['code'], range: { min: '0%', max: '110%' } },
+                y: { set: ['Folder level 0'], range: { min: '0%', max: '100%' } },
+                x: { set: ['Line count'], range: { min: '0%', max: '110%' } },
                 color: { set: null },
-                label: { set: ['code'] },
+                label: { set: ['Line count'] },
             },
             title: null,
             legend: null

@@ -4,9 +4,9 @@ function anim_0100_1000(chart) {
         config: {
             channels: {
                 y: { set: null, range: { min: '0%', max: '100%' } },
-                x: { set: ['code'], range: { min: '0%', max: '100%' } },
+                x: { set: ['Line count'], range: { min: '0%', max: '100%' } },
                 color: { set: null },
-                label: { set: ['code'] },
+                label: { set: ['Line count'] },
             },
             title: null, //1 code 1
         },

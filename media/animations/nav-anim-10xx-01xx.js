@@ -4,7 +4,7 @@ function nav_anim_10xx_01xx(chart, dirLevel) {
         config: {
             channels: {
                 y: { set: ['$count'], range: { min: '0%', max: '100%' } },
-                x: { set: ['dir' + dirLevel] },
+                x: { set: ['Folder level ' + dirLevel] },
                 color: { set: null },
                 label: { set: ['$count'] },
             },

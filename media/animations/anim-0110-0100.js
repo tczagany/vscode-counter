@@ -4,9 +4,9 @@ function anim_0110_0100(chart) {
         config: {
             channels: {
                 y: { set: ['$count'], range: { min: '0%', max: '110%' } },
-                x: { set: ['type'] },
+                x: { set: ['Language'] },
                 label: { set: ['$count'] },
-                color: { set: ['type'] }
+                color: { set: ['Language'] }
             },
             title: null, //  '10 File count + types 2',
             sort: 'byValue',
@@ -27,9 +27,9 @@ function anim_0110_0100(chart) {
         .then(chart => chart.animate({
             config: {
                 channels: {
-                    y: { set: ['$count', 'file'], range: { min: '0%', max: '110%' } },
-                    x: { set: ['type'] },
-                    color: { set: ['type'] },
+                    y: { set: ['$count', 'File name'], range: { min: '0%', max: '110%' } },
+                    x: { set: ['Language'] },
+                    color: { set: ['Language'] },
                     label: { set: null },
                 },
                 title: null, //  '11 File count + type 3',
@@ -51,10 +51,10 @@ function anim_0110_0100(chart) {
         .then(chart => chart.animate({
             config: {
                 channels: {
-                    y: { set: ['$count', 'type', 'file'], range: { min: '0%', max: '100%' } },
+                    y: { set: ['$count', 'Language', 'File name'], range: { min: '0%', max: '100%' } },
                     x: { set: null },
                     label: { set: null },
-                    color: { set: ['type'] }
+                    color: { set: ['Language'] }
                 },
                 title: null, //  '12 File count 1',
                 legend: null

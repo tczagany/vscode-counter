@@ -80,13 +80,13 @@ export default class VizzuDataPreprocessor {
 	}
 
 	generateTableStructure() {
-		this._vizzuDataTable.series.push({ name: 'file', type: 'dimension' });
-		this._vizzuDataTable.series.push({ name: 'type', type: 'dimension' });
-		this._vizzuDataTable.series.push({ name: 'code', type: 'measure' });
+		this._vizzuDataTable.series.push({ name: 'File name', type: 'dimension' });
+		this._vizzuDataTable.series.push({ name: 'Language', type: 'dimension' });
+		this._vizzuDataTable.series.push({ name: 'Line count', type: 'measure' });
 		this._vizzuDataTable.series.push({ name: 'blank', type: 'measure' });
 		this._vizzuDataTable.series.push({ name: 'comment', type: 'measure' });
 		for(let i = 0; i < this.dirStructureDepth; i++) {
-			this._vizzuDataTable.series.push({ name: 'dir' + i, type: 'dimension' });
+			this._vizzuDataTable.series.push({ name: 'Folder level ' + i, type: 'dimension' });
 		}
 	}
 

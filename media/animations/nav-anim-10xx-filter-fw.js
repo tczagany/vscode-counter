@@ -1,13 +1,13 @@
 function nav_anim_10xx_filter_fw(chart, dirLevel) {
 
-    let crDir = 'dir' + (dirLevel - 1);
-    let nextDir = 'dir' + dirLevel;
+    let crDir = 'Folder level ' + (dirLevel - 1);
+    let nextDir = 'Folder level ' + dirLevel;
 
     return chart.animate({
         config: {
             channels: {
                 y: { set: null, range: { min: '0%', max: '100%' } },
-                x: { set: ['code', nextDir] },
+                x: { set: ['Line count', nextDir] },
                 color: { set: null },
                 label: { set: null }
             },
@@ -28,7 +28,7 @@ function nav_anim_10xx_filter_fw(chart, dirLevel) {
             config: {
                 channels: {
                     y: { set: [nextDir], range: { min: '0%', max: '100%' } },
-                    x: { set: ['code'] }
+                    x: { set: ['Line count'] }
                 }
             },
             style: {
@@ -45,8 +45,8 @@ function nav_anim_10xx_filter_fw(chart, dirLevel) {
             config: {
                 channels: {
                     y: { set: [nextDir], range: { min: '0%', max: '100%' } },
-                    x: { set: ['code'] },
-                    label: { set: ['code'] }
+                    x: { set: ['Line count'] },
+                    label: { set: ['Line count'] }
                 }
             },
             style: {

@@ -63,7 +63,7 @@ function navChartClick(event) {
     if (event.data.marker != undefined) {
         if (dirMaxDepth - 1 > dirFilter.length) {
             let level = dirFilter.length;
-            let levelStr = 'dir' + level.toString();
+            let levelStr = 'Folder level ' + level.toString();
             let filterStr = event.data.marker.categories[levelStr];
             dirFilter.push(filterStr);
             applyFilter();
@@ -91,7 +91,7 @@ function applyFilter() {
 		data: {
 			filter: (record) => {
                 for(let i = 0; i < dirFilter.length; i++) {
-                    let name = 'dir' + i;
+                    let name = 'Folder level ' + i;
                     let value = dirFilter[i];
                     if (record[name] != value)
                         return false;
@@ -104,7 +104,7 @@ function applyFilter() {
 		data: {
 			filter: (record) => {
                 for(let i = 0; i < dirFilter.length; i++) {
-                    let name = 'dir' + i;
+                    let name = 'Folder level ' + i;
                     let value = dirFilter[i];
                     if (record[name] != value)
                         return false;
@@ -201,7 +201,7 @@ function applyBackFilter() {
 		data: {
 			filter: (record) => {
                 for(let i = 0; i < dirFilter.length; i++) {
-                    let name = 'dir' + i;
+                    let name = 'Folder level ' + i;
                     let value = dirFilter[i];
                     if (record[name] != value)
                         return false;
@@ -214,7 +214,7 @@ function applyBackFilter() {
 		data: {
 			filter: (record) => {
                 for(let i = 0; i < dirFilter.length; i++) {
-                    let name = 'dir' + i;
+                    let name = 'Folder level ' + i;
                     let value = dirFilter[i];
                     if (record[name] != value)
                         return false;

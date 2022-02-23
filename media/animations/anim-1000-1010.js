@@ -4,9 +4,9 @@ function anim_1000_1010(chart) {
         config: {
             channels: {
                 y: { set: null, range: { min: '0%', max: '100%' } },
-                x: { set: ['code'], range: { min: '0%', max: '100%' } },
+                x: { set: ['Line count'], range: { min: '0%', max: '100%' } },
                 color: { set: null },
-                label: { set: ['code'] },
+                label: { set: ['Line count'] },
             },
             title: null, //1 code 1
         },
@@ -27,8 +27,8 @@ function anim_1000_1010(chart) {
             config: {
                 channels: {
                     y: { set: null, range: { min: '0%', max: '100%' } },
-                    x: { set: ['type', 'code'], range: { min: '0%', max: '100%' } },
-                    color: 'type',
+                    x: { set: ['Language', 'Line count'], range: { min: '0%', max: '100%' } },
+                    color: 'Language',
                     label: null
                 },
                 title: null, // 2 code 2
@@ -50,9 +50,9 @@ function anim_1000_1010(chart) {
         .then(chart => chart.animate({
             config: {
                 channels: {
-                    y: { set: ['type'], range: { min: '0%', max: '100%' } },
-                    x: { set: ['code'] },
-                    color: 'type',
+                    y: { set: ['Language'], range: { min: '0%', max: '100%' } },
+                    x: { set: ['Line count'] },
+                    color: 'Language',
                     label: { set: null },
                 },
                 title: null, // 3 code + types 1
@@ -73,10 +73,10 @@ function anim_1000_1010(chart) {
         .then(chart => chart.animate({
             config: {
                 channels: {
-                    y: { set: ['type'], range: { min: '0%', max: '100%' } },
-                    x: { set: ['code'] },
-                    color: 'type',
-                    label: { set: ['code'] },
+                    y: { set: ['Language'], range: { min: '0%', max: '100%' } },
+                    x: { set: ['Line count'] },
+                    color: 'Language',
+                    label: { set: ['Line count'] },
                 },
                 title: null, //  '4 code + types 2',
                 sort: 'byValue',

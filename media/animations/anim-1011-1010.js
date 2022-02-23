@@ -3,9 +3,9 @@ function anim_1011_1010(chart) {
     return chart.animate({
         config: {
             channels: {
-                y: { set: ['type'], range: { min: '0%', max: '100%' } },
-                x: { set: ['code', 'file'] },
-                color: 'type',
+                y: { set: ['Language'], range: { min: '0%', max: '100%' } },
+                x: { set: ['Line count', 'File name'] },
+                color: 'Language',
                 label: null
             },
             title: null, //  '5 code + types 3'
@@ -27,10 +27,10 @@ function anim_1011_1010(chart) {
         .then(chart => chart.animate({
             config: {
                 channels: {
-                    y: { set: ['type'], range: { min: '0%', max: '100%' } },
-                    x: { set: ['code'] },
-                    color: 'type',
-                    label: { set: ['code'] },
+                    y: { set: ['Language'], range: { min: '0%', max: '100%' } },
+                    x: { set: ['Line count'] },
+                    color: 'Language',
+                    label: { set: ['Line count'] },
                 },
                 title: null, //  '4 code + types 2',
                 legend: null,
